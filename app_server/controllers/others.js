@@ -1,4 +1,4 @@
-/* GET home page */
+/* GET generic static webpage*/
 module.exports.about = function(req, res){
-  res.render('index', { title: 'About Page' });
+  res.render('generic-text', { title: 'About Page' });
 };
