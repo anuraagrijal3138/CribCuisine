@@ -1,67 +1,27 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
   #banner.page-header
     .row
       .col-lg-6
-        h1
-          | cribCuisine
-          small &nbsp;Find healthy home-cooked cuisines in your dorm!
+        h1= pageHeader.title
+         small &nbsp;#{pageHeader.strapline}
   .row
     .col-xs-12.col-sm-8
       .row.list-group
-        .col-xs-12.list-group-item
-          h4
-            a(href='/cuisine') Newari Momo
-            small &nbsp;
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-            span.badge.pull-right.badge-default 100m
-          p.address 125 High Street, Reading, RG6 1PS
-          p
-            span.label.label-warning Hot drinks
-            | &nbsp;
-            span.label.label-warning Food
-            | &nbsp;
-            span.label.label-warning Premium wifi
-            | &nbsp;
-        .col-xs-12.list-group-item
-          h4
-            a(href='/cuisine') Rice and Noodles
-            small &nbsp;
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-            span.badge.pull-right.badge-default 200m
-          p.address 125 High Street, Reading, RG6 1PS
-          p
-            span.label.label-warning Hot drinks
-            | &nbsp;
-            span.label.label-warning Food
-            | &nbsp;
-            span.label.label-warning Premium wifi
-            | &nbsp;
-        .col-xs-12.list-group-item
-          h4
-            a(href='/cuisine') Chow mein
-            small &nbsp;
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-            span.badge.pull-right.badge-default 250m
-          p.address 125 High Street, Reading, RG6 1PS
-          p
-            span.label.label-warning Food
-            | &nbsp;
-            span.label.label-warning Premium wifi
-            | &nbsp;
-    .col-xs-12.col-sm-4
-      p.lead
-        | Looking for healthy, delicious home-cooked meal? CribCuisine helps you find places to eat healthy `dorm-cooked` meals. Perhaps Jamaican curry, Nepalese dumplings or a authentic bowl of ramen? Let cribCuisine help you find the next exotic cuisine you're looking for.
+        each cuisine in cuisines
+          .col-xs-12.list-group-item
+            h4 
+              a(href="/cuisine")= cuisine.name
+              small &nbsp;
+                +outputRating(cuisine.rating)
+              span.badge.pull-right.badge-default= cuisine.distance
+            p
+              cuisine= cuisine.intro
+              address= cuisine.address
+            
+                &nbsp;
+    .col-xs-12.col-sm-4 
+      p.lead= sidebar
