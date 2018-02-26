@@ -1,3 +1,4 @@
+
 var mongoose = require('mongoose');
 
 //first we define the schema for subdocuments
@@ -26,6 +27,4 @@ var cuisineSchema = new mongoose.Schema({
  	reviews: [reviewSchema]
 });
 
-
-
-        
+mongoose.model('Cuisine', cuisineSchema);
