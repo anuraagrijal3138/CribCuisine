@@ -1,24 +1,5 @@
 var mongoose = require('mongoose');
-var models = require('../models/cuisines');
-
 var Cus = mongoose.model('Cuisine');
-var theEarth = (function() {
-  var earthRadius = 6371; // km, miles is 3959
-
-  var getDistanceFromRads = function(rads) {
-    return parseFloat(rads * earthRadius);
-  };
-
-  var getRadsFromDistance = function(distance) {
-    return parseFloat(distance / earthRadius);
-  };
-
-  return {
-    getDistanceFromRads: getDistanceFromRads,
-    getRadsFromDistance: getRadsFromDistance
-  };
-})();
-
 
 var sendJSONresponse = function(res, status, content) {
   //console.log("Problem here");
@@ -27,19 +8,41 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
-
 module.exports.cuisinesCreate = function (req, res) {
- sendJsonResponse(res, 200, {"status" : "success"});
-};
+ console.log(req.body);
+   Cus.create({
+     name: req.body.name,
+     address: req.body.address,
+     hostingTimes: [{
+       days: req.body.days1,
+       opening: req.body.opening1,
+       closing: req.body.closing1,
+       closed: req.body.closed1,
+     }, {
+       days: req.body.days2,
+       opening: req.body.opening2,
+       closing: req.body.closing2,
+       closed: req.body.closed2,
+     }]
+   }, function(err, cuisine) {
+     if (err) {
+       console.log(err);
+       sendJSONresponse(res, 400, err);
+     } else {
+       console.log(cuisine);
+       sendJSONresponse(res, 201, cuisine);
+     }
+   });
+ };
 
 
-module.exports.cuisinesListByDistance = function (req, res) {
- sendJsonResponse(res, 200, {"status" : "success"});
-};
+//module.exports.cuisinesListByDistance = function (req, res) {
+// sendJsonResponse(res, 200, {"status" : "success"});
+//};
 
 module.exports.cuisinesReadOne = function (req, res) {
  
- console.log('Finding location details', req.params);
+ console.log('Finding cuisine details', req.params);
   if (req.params && req.params.cuisineid) {
     Cus
       .findById(req.params.cuisineid)
@@ -58,18 +61,80 @@ module.exports.cuisinesReadOne = function (req, res) {
         sendJSONresponse(res, 200, cuisine);
       });
   } else {
-    console.log('No locationid specified');
+    console.log('No cuisineid specified');
     sendJSONresponse(res, 404, {
-      "message": "No locationid in request"
+      "message": "No cuisineid in request"
     });
   }
 };
 
 
 module.exports.cuisinesUpdateOne = function (req, res) {
- sendJsonResponse(res, 200, {"status" : "success"});
+ if (!req.params.cuisineid) {
+     sendJSONresponse(res, 404, {
+       "message": "Not found, cuisineid is required"
+     });
+     return;
+   }
+   Cus
+     .findById(req.params.cuisineid)
+     .select('-reviews -rating')
+     .exec(
+       function(err, cuisine) {
+         if (!cuisine) {
+           sendJSONresponse(res, 404, {
+             "message": "cuisineid not found"
+           });
+           return;
+         } else if (err) {
+           sendJSONresponse(res, 400, err);
+           return;
+         }
+         cuisine.name = req.body.name;
+         cuisine.address = req.body.address;
+         cuisine.facilities = req.body.facilities.split(",");
+         //cuisine.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
+         cuisine.openingTimes = [{
+           days: req.body.days1,
+           opening: req.body.opening1,
+           closing: req.body.closing1,
+           closed: req.body.closed1,
+         }, {
+           days: req.body.days2,
+           opening: req.body.opening2,
+           closing: req.body.closing2,
+           closed: req.body.closed2,
+         }];
+         cuisine.save(function(err, cuisine) {
+           if (err) {
+             sendJSONresponse(res, 404, err);
+           } else {
+             sendJSONresponse(res, 200, cuisine);
+       }
+       });
+       }
+   );
 };
 
 module.exports.cuisinesDeleteOne= function (req, res) {
- sendJsonResponse(res, 200, {"status" : "success"});
+ var cuisineid = req.params.cuisineid;
+   if (cuisineid) {
+     Cus
+       .findByIdAndRemove(cuisineid)
+       .exec(
+         function(err, cuisine) {
+           if (err) {
+             console.log(err);
+             sendJSONresponse(res, 404, err);
+             return;
+           }
+           console.log("cuisine id " + cuisineid + " deleted");
+           sendJSONresponse(res, 204, null);
+         }
+     );
+   } else {
+     sendJSONresponse(res, 404, {
+       "message": "No cuisineid"
+     });
+   }
 };

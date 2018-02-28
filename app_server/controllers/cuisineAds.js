@@ -1,37 +1,37 @@
 /* GET 'home' page */
 module.exports.homelist = function(req, res){
  res.render('cuisines-list', { 
- 	title: 'cribCuisine - find healthy home-cooked meal',
- 	pageHeader:{
- 		title: 'cribCuisine',
- 		strapline: 'Find people who wil offer you healthy home mad cuisines!'
- 	} ,
- 	cuisines: [{
- 	 name: 'Momo',
-	 address: '125 High Street, Reading, RG6 1PPgS',
-	 rating: 3,
-	 intro: 'Brief description about food author',
-	 distance: '100m'
-	 },{
-	 name: 'Chow mein',
-	 address: '125 High Street, Reading, RG6 1PS',
-	 rating: 4,
-	 intro: 'Chow mein is one of the popular street-food in Nepal. It has its roots on China',
-	 distance: '200m'
-	 },{
-	 name: 'Bhat',
-	 address: '125 High Street, Reading, RG6 1PS',
-	 rating: 2,
-	 intro: 'Bhaat is main food of Nepal',
- 	  distance: '250m'
- 	}]
+    title: 'cribCuisine - find healthy home-cooked meal',
+    pageHeader:{
+        title: 'cribCuisine',
+        strapline: 'Find people who wil offer you healthy home mad cuisines!'
+    } ,
+    cuisines: [{
+     name: 'Momo',
+     address: '125 High Street, Reading, RG6 1PPgS',
+     rating: 3,
+     intro: 'Brief description about food author',
+     distance: '100m'
+     },{
+     name: 'Chow mein',
+     address: '125 High Street, Reading, RG6 1PS',
+     rating: 4,
+     intro: 'Chow mein is one of the popular street-food in Nepal. It has its roots on China',
+     distance: '200m'
+     },{
+     name: 'Bhat',
+     address: '125 High Street, Reading, RG6 1PS',
+     rating: 2,
+     intro: 'Bhaat is main food of Nepal',
+      distance: '250m'
+    }]
 
  });
 };
 /* GET 'cuisine info' page */
 module.exports.cuisineInfo = function(req, res){
  res.render('cuisine-info', { 
-	title: 'Newari MoMo',
+    title: 'Newari MoMo',
         pageHeader: {
             title: 'Newari Momo'
         },
@@ -81,7 +81,7 @@ module.exports.cuisineInfo = function(req, res){
 /* GET 'Add review' page */
 module.exports.addReview = function(req, res){
  res.render('cuisine-review-form', { 
- 	title: 'Review NewariMomo on cribCuisine',
+    title: 'Review NewariMomo on cribCuisine',
         pageHeader: {
             title: 'Review NewariMoMo'
         }
