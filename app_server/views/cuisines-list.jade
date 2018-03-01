@@ -14,14 +14,11 @@ block content
         each cuisine in cuisines
           .col-xs-12.list-group-item
             h4 
-              a(href="/cuisine")= cuisine.name
-              small &nbsp;
-                +outputRating(cuisine.rating)
-              span.badge.pull-right.badge-default= cuisine.distance
+              a(href="/cuisine/#{cuisine._id}")= cuisine.name
             p
               cuisine= cuisine.intro
               address= cuisine.address
             
-                &nbsp;
+              
     .col-xs-12.col-sm-4 
       p.lead= sidebar

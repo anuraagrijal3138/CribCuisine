@@ -7,8 +7,11 @@ var ctrlOthers = require('../controllers/others');
 
 /* cuisine pages */
 router.get('/', ctrlCuisineAds.homelist);
-router.get('/cuisine', ctrlCuisineAds.cuisineInfo);
-router.get('/cuisine/review/new', ctrlCuisineAds.addReview);
+router.get('/cuisine/:cuisineid', ctrlCuisineAds.cuisineInfo);
+router.get('/cuisine/:cuisineid/review/new', ctrlCuisineAds.addReview);
+router.post('/cuisine/:cuisineid/review/new', ctrlCuisineAds.doAddReview);
+
 /* Other pages */
 router.get('/about', ctrlOthers.about);
+
 module.exports = router;

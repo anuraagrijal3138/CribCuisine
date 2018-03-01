@@ -28,17 +28,12 @@ block content
               h2.panel-title Intro
             .panel-body
               p=cuisine.intro
-        .col-xs-12.col-sm-6.location-map
-          .panel.panel-primary
-            .panel-heading
-              h2.panel-title Location map
-            .panel-body
-              img.img-responsive.img-rounded(src="http://maps.googleapis.com/maps/api/staticmap?center=#{cuisine.coords.lat},#{cuisine.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{cuisine.coords.lat},#{cuisine.coords.lng}&scale=2")
+        
       .row
         .col-xs-12
           .panel.panel-primary.review-panel
             .panel-heading
-              a.btn.btn-default.pull-right(href="/cuisine/review/new") Add review
+              a.btn.btn-default.pull-right(href="/cuisine/#{cuisine._id}/review/new") Add review
               h2.panel-title Customer reviews
             .panel-body.review-container
               each review in cuisine.reviews
