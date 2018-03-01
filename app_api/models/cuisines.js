@@ -11,7 +11,7 @@ var reviewSchema = new mongoose.Schema({
 }); 
 
 var hostingTimeSchema = new mongoose.Schema({
- 	days: {type: String, required: true},
+ 	days: {type: String, required: false},
  	opening: String,
  	closing: String,
  	closed: {type: Boolean, required: true}
