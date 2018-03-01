@@ -1,89 +1,161 @@
+var request = require('request');
+var apiOptions = {
+  server : "http://localhost:3000"
+};
+if (process.env.NODE_ENV === 'production') {
+  apiOptions.server = "https://crib-cuisine.herokuapp.com";
+}
+
+var _showError = function (req, res, status) {
+  var title, content;
+  if (status === 404) {
+    title = "404, page not found";
+    content = "Oh dear. Looks like we can't find this page. Sorry.";
+  } else if (status === 500) {
+    title = "500, internal server error";
+    content = "How embarrassing. There's a problem with our server.";
+  } else {
+    title = status + ", something's gone wrong";
+    content = "Something, somewhere, has gone just a little bit wrong.";
+  }
+  res.status(status);
+  res.render('generic-text', {
+    title : title,
+    content : content
+  });
+};
+
+var renderHomepage = function(req, res, responseBody){
+  var message;
+  if (!(responseBody instanceof Array)) {
+    message = "API lookup error";
+    responseBody = [];
+  } else {
+    if (!responseBody.length) {
+      message = "No places found nearby";
+    }
+  }
+  res.render('cuisines-list', {
+    title: 'CribCuisine',
+    pageHeader: {
+      title: 'Loc8r',
+      strapline: 'Find people who wil offer you healthy home mad cuisines! '
+    },
+    sidebar: "Looking for homemade food? Search no more.",
+    cuisines: responseBody,
+    message: message
+  });
+};
+
 /* GET 'home' page */
 module.exports.homelist = function(req, res){
- res.render('cuisines-list', { 
-    title: 'cribCuisine - find healthy home-cooked meal',
-    pageHeader:{
-        title: 'cribCuisine',
-        strapline: 'Find people who wil offer you healthy home mad cuisines!'
-    } ,
-    cuisines: [{
-     name: 'Momo',
-     address: '125 High Street, Reading, RG6 1PPgS',
-     rating: 3,
-     intro: 'Brief description about food author',
-     distance: '100m'
-     },{
-     name: 'Chow mein',
-     address: '125 High Street, Reading, RG6 1PS',
-     rating: 4,
-     intro: 'Chow mein is one of the popular street-food in Nepal. It has its roots on China',
-     distance: '200m'
-     },{
-     name: 'Bhat',
-     address: '125 High Street, Reading, RG6 1PS',
-     rating: 2,
-     intro: 'Bhaat is main food of Nepal',
-      distance: '250m'
-    }]
-
- });
+  var requestOptions, path;
+  path = '/api/cuisines';
+  requestOptions = {
+    url : apiOptions.server + path,
+    method : "GET",
+    json : {}
+  };
+  request(
+    requestOptions,
+    function(err, response, body) {
+      var data;
+      data = body;
+      if(response.statusCode == 200){
+        renderHomepage(req, res, data);
+      }else{
+        _showError(req, res, response.statusCode);
+      }
+    }
+  );
 };
-/* GET 'cuisine info' page */
+
+var getCuisineInfo = function(req, res, callback){
+  var requestOptions, path;
+  path = "/api/cuisines/" + req.params.cuisineid;
+  requestOptions = {
+    url : apiOptions.server + path,
+    method : "GET",
+    json : {}
+  };
+  request(
+    requestOptions,
+    function(err, response, body){
+      var data = body;
+      if(response.statusCode == 200){
+        callback(req, res, data);
+      }else{
+        _showError(req, res, response.statusCode);
+      }
+    }
+    );
+};
+
+var renderDetailPage = function (req, res, CusDetail) {
+  res.render('cuisine-info', {
+    title: CusDetail.name,
+    pageHeader: {title: CusDetail.name},
+    sidebar: {
+      context: 'is on CribCuisine',
+      callToAction: 'If you\'ve been and you like it - or if you don\'t - please leave a review to help other people just like you.'
+    },
+    cuisine: CusDetail,
+  });
+};
+
+/* GET 'Cuisine info' page */
 module.exports.cuisineInfo = function(req, res){
- res.render('cuisine-info', { 
-    title: 'Newari MoMo',
-        pageHeader: {
-            title: 'Newari Momo'
-        },
-        sidebar: {
-            context: 'is on cibCuisine because you can\'t die without trying momos',
-            callToAction: 'If you\'ve been and you like it - or if you don\'t - please leave a review to help other people just like you.'
-        },
-        cuisine: {
-            name: 'Newari Food',
-            address: '125 High Street, Reading, RG6 1PS',
-            rating: 3,
-            intro: "You can't die before tasting momos; one cannot live without momos after tasting it",
-            coords: {
-                lat: 51.455041,
-                lng: -0.9690884
-            },
-            hostingTimes: [{
-                days: 'Monday - Friday',
-                opening: '7:00am',
-                closing: '7:00pm',
-                closed: false
-            }, {
-                days: 'Saturday',
-                opening: '8:00am',
-                closing: '5:00pm',
-                closed: false
-            }, {
-                days: 'Sunday',
-                closed: true
-            }],
-            reviews: [{
-                author: 'Ashim Paudel',
-                rating: 5,
-                timestamp: '16 July 2018',
-                reviewText: 'What a great place. I can\'t say enough good things about it.'
-            }, {
-                author: 'Anuraag Rijal',
-                rating: 3,
-                timestamp: '16 June 2018',
-                reviewText: 'It was okay. Coffee wasn\'t great, but the wifi was fast.'
-            }]
-        }
-    });
+  getCuisineInfo(req, res, function(req,res,responseData){
+    renderDetailPage(req, res, responseData);
+  });
 };
 
+var renderReviewForm = function (req, res, CusDetail) {
+  res.render('cuisine-review-form', {
+    title: 'Review ' + CusDetail.name + ' on CribCuisine',
+    pageHeader: { title: 'Review ' + CusDetail.name },
+    error: req.query.err
+  });
+};
 
 /* GET 'Add review' page */
 module.exports.addReview = function(req, res){
- res.render('cuisine-review-form', { 
-    title: 'Review NewariMomo on cribCuisine',
-        pageHeader: {
-            title: 'Review NewariMoMo'
+  getCuisineInfo(req, res, function(req, res, responseData) {
+    renderReviewForm(req, res, responseData);
+  });
+};
+
+/* POST 'Add review' page */
+module.exports.doAddReview = function(req, res){
+  console.log("yo bhayo");
+  var requestOptions, path, cuisineid, postdata;
+  cuisineid = req.params.cuisineid;
+  path = "/api/cuisines/" + cuisineid + '/reviews';
+  postdata = {
+    author: req.body.name,
+    rating: parseInt(req.body.rating, 10),
+    reviewText: req.body.review
+  };
+  requestOptions = {
+    url : apiOptions.server + path,
+    method : "POST",
+    json : postdata
+  };
+  if (!postdata.author || !postdata.rating || !postdata.reviewText) {
+    res.redirect('/cuisine/' + cuisineid + '/reviews/new?err=val');
+  } else {
+    request(
+      requestOptions,
+      function(err, response, body) {
+        if (response.statusCode === 201) {
+          res.redirect('/cuisine/' + cuisineid);
+        } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
+          res.redirect('/cuisine/' + cuisineid + '/reviews/new?err=val');
+        } else {
+          console.log(body);
+          _showError(req, res, response.statusCode);
         }
-});
+      }
+    );
+  }
 };

@@ -4,10 +4,10 @@ var mongoose = require('mongoose');
 //first we define the schema for subdocuments
 //In our case, reviews and hosting Time are subdocuments
 var reviewSchema = new mongoose.Schema({
- 	author: String,
+ 	author: {type: String, required:true},
  	rating: {type: Number, required: true, min: 0, max: 5},
- 	reviewText: String,
- 	createdOn: {type: Date, default: Date.now}
+ 	reviewText: {type: String, required:true},
+ 	createdOn: {type: Date, "default": Date.now}
 }); 
 
 var hostingTimeSchema = new mongoose.Schema({

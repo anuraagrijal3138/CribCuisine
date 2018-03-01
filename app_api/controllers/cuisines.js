@@ -8,6 +8,37 @@ var sendJSONresponse = function(res, status, content) {
   res.json(content);
 };
 
+module.exports.cuisinesList = function (req, res) {
+  Cus
+    .find()
+    .limit(5)
+    .exec(function(err, cuisine){
+      if (err){
+        console.log(err);
+        sendJSONresponse(res, 404,{
+          "message": "cusinises not found"
+        })
+        return;
+      }else{
+        console.log(cuisine);
+        sendJSONresponse(res, 200, cuisine);
+      }
+    });
+};
+/*
+var buildCuisineList = function(req, res, results, stats) {
+  var cuisines = [];
+  results.forEach(function(doc) {
+    cuisines.push({
+      name: doc.obj.name,
+      address: doc.obj.address,
+      intro: doc.obj.intro,
+      _id: doc.obj._id
+    });
+  });
+  return locations;
+};
+*/
 module.exports.cuisinesCreate = function (req, res) {
  console.log(req.body);
    Cus.create({
@@ -24,25 +55,6 @@ module.exports.cuisinesCreate = function (req, res) {
      }
    });
  };
-
-
-module.exports.cuisinesList = function (req, res) {
-  Cus
-    .find()
-    .limit(4)
-    .exec(function(err, cuisine){
-      if (err){
-        console.log(err);
-        sendJSONresponse(res, 404,{
-          "message": "cusinises not found"
-        })
-        return;
-      }else{
-        console.log(cuisine);
-        sendJSONresponse(res, 200, cuisine);
-      }
-    });
-};
 
 module.exports.cuisinesReadOne = function (req, res) {
  
@@ -96,9 +108,9 @@ module.exports.cuisinesUpdateOne = function (req, res) {
          }
          cuisine.name = req.body.name;
          cuisine.address = req.body.address;
-         cuisine.facilities = req.body.facilities.split(",");
+         cuisine.intro = req.body.intro;
          //cuisine.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
-         cuisine.openingTimes = [{
+         cuisine.hostingTimes = [{
            days: req.body.days1,
            opening: req.body.opening1,
            closing: req.body.closing1,
@@ -142,3 +154,4 @@ module.exports.cuisinesDeleteOne= function (req, res) {
      });
    }
 };
+

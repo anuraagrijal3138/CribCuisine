@@ -20,22 +20,23 @@ module.exports.reviewsCreate = function (req, res) {
        .exec(
          function(err, cuisine) {
            if (err) {
-             sendJSONresponse(res, 400, err);
+             sendJsonResponse(res, 400, err);
            } else {
              doAddReview(req, res, cuisine);
            }
          }
      );
    } else {
-     sendJSONresponse(res, 404, {
+     sendJsonResponse(res, 404, {
        "message": "Not found, cuisineid required"
      });
    }
 };
 
 var doAddReview = function(req, res, cuisine) {
+  console.log("gg");
   if (!cuisine) {
-    sendJSONresponse(res, 404, "cuisineid not found");
+    sendJsonResponse(res, 404, "cuisineid not found");
   } else {
     cuisine.reviews.push({
       author: req.body.author,
@@ -45,11 +46,11 @@ var doAddReview = function(req, res, cuisine) {
     cuisine.save(function(err, cuisine) {
       var thisReview;
       if (err) {
-        sendJSONresponse(res, 400, err);
+        sendJsonResponse(res, 400, err);
       } else {
         updateAverageRating(cuisine._id);
         thisReview = cuisine.reviews[cuisine.reviews.length - 1];
-        sendJSONresponse(res, 201, thisReview);
+        sendJsonResponse(res, 201, thisReview);
       }
     });
   }
@@ -90,7 +91,7 @@ var doSetAverageRating = function(cuisine) {
 
 module.exports.reviewsUpdateOne = function(req, res) {
   if (!req.params.cuisineid || !req.params.reviewid) {
-    sendJSONresponse(res, 404, {
+    sendJsonResponse(res, 404, {
       "message": "Not found, cuisineid and reviewid are both required"
     });
     return;
@@ -102,18 +103,18 @@ module.exports.reviewsUpdateOne = function(req, res) {
       function(err, cuisine) {
         var thisReview;
         if (!cuisine) {
-          sendJSONresponse(res, 404, {
+          sendJsonResponse(res, 404, {
             "message": "cuisineid not found"
           });
           return;
         } else if (err) {
-          sendJSONresponse(res, 400, err);
+          sendJsonResponse(res, 400, err);
           return;
         }
         if (cuisine.reviews && cuisine.reviews.length > 0) {
           thisReview = cuisine.reviews.id(req.params.reviewid);
           if (!thisReview) {
-            sendJSONresponse(res, 404, {
+            sendJsonResponse(res, 404, {
               "message": "reviewid not found"
             });
           } else {
@@ -122,15 +123,15 @@ module.exports.reviewsUpdateOne = function(req, res) {
             thisReview.reviewText = req.body.reviewText;
             cuisine.save(function(err, cuisine) {
               if (err) {
-                sendJSONresponse(res, 404, err);
+                sendJsonResponse(res, 404, err);
               } else {
                 updateAverageRating(cuisine._id);
-                sendJSONresponse(res, 200, thisReview);
+                sendJsonResponse(res, 200, thisReview);
               }
             });
           }
         } else {
-          sendJSONresponse(res, 404, {
+          sendJsonResponse(res, 404, {
             "message": "No review to update"
           });
         }
@@ -149,18 +150,18 @@ module.exports.reviewsReadOne = function(req, res) {
           console.log(cuisine);
           var response, review;
           if (!cuisine) {
-            sendJSONresponse(res, 404, {
+            sendJsonResponse(res, 404, {
               "message": "cuisineid not found"
             });
             return;
           } else if (err) {
-            sendJSONresponse(res, 400, err);
+            sendJsonResponse(res, 400, err);
             return;
           }
           if (cuisine.reviews && cuisine.reviews.length > 0) {
             review = cuisine.reviews.id(req.params.reviewid);
             if (!review) {
-              sendJSONresponse(res, 404, {
+              sendJsonResponse(res, 404, {
                 "message": "reviewid not found"
               });
             } else {
@@ -171,17 +172,17 @@ module.exports.reviewsReadOne = function(req, res) {
                 },
                 review: review
               };
-              sendJSONresponse(res, 200, response);
+              sendJsonResponse(res, 200, response);
             }
           } else {
-            sendJSONresponse(res, 404, {
+            sendJsonResponse(res, 404, {
               "message": "No reviews found"
             });
           }
         }
     );
   } else {
-    sendJSONresponse(res, 404, {
+    sendJsonResponse(res, 404, {
       "message": "Not found, cuisineid and reviewid are both required"
     });
   }
@@ -190,7 +191,7 @@ module.exports.reviewsReadOne = function(req, res) {
 // app.delete('/api/cuisines/:cuisineid/reviews/:reviewid'
 module.exports.reviewsDeleteOne = function(req, res) {
   if (!req.params.cuisineid || !req.params.reviewid) {
-    sendJSONresponse(res, 404, {
+    sendJsonResponse(res, 404, {
       "message": "Not found, cuisineid and reviewid are both required"
     });
     return;
@@ -201,32 +202,32 @@ module.exports.reviewsDeleteOne = function(req, res) {
     .exec(
       function(err, cuisine) {
         if (!cuisine) {
-          sendJSONresponse(res, 404, {
+          sendJsonResponse(res, 404, {
             "message": "cuisineid not found"
           });
           return;
         } else if (err) {
-          sendJSONresponse(res, 400, err);
+          sendJsonResponse(res, 400, err);
           return;
         }
         if (cuisine.reviews && cuisine.reviews.length > 0) {
           if (!cuisine.reviews.id(req.params.reviewid)) {
-            sendJSONresponse(res, 404, {
+            sendJsonResponse(res, 404, {
               "message": "reviewid not found"
             });
           } else {
             cuisine.reviews.id(req.params.reviewid).remove();
             cuisine.save(function(err) {
               if (err) {
-                sendJSONresponse(res, 404, err);
+                sendJsonResponse(res, 404, err);
               } else {
                 updateAverageRating(cuisine._id);
-                sendJSONresponse(res, 204, null);
+                sendJsonResponse(res, 204, null);
               }
             });
           }
         } else {
-          sendJSONresponse(res, 404, {
+          sendJsonResponse(res, 404, {
             "message": "No review to delete"
           });
         }
