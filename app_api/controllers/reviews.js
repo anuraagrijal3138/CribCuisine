@@ -34,7 +34,7 @@ module.exports.reviewsCreate = function (req, res) {
 };
 
 var doAddReview = function(req, res, cuisine) {
-  console.log("gg");
+  //console.log("gg");
   if (!cuisine) {
     sendJsonResponse(res, 404, "cuisineid not found");
   } else {

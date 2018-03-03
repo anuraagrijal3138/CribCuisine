@@ -38,7 +38,7 @@ var renderHomepage = function(req, res, responseBody){
   res.render('cuisines-list', {
     title: 'CribCuisine',
     pageHeader: {
-      title: 'Loc8r',
+      title: 'CribCuisine',
       strapline: 'Find people who wil offer you healthy home mad cuisines! '
     },
     sidebar: "Looking for homemade food? Search no more.",
@@ -63,8 +63,6 @@ module.exports.homelist = function(req, res){
       data = body;
       if(response.statusCode == 200){
         renderHomepage(req, res, data);
-      }else{
-        _showError(req, res, response.statusCode);
       }
     }
   );
@@ -127,7 +125,7 @@ module.exports.addReview = function(req, res){
 
 /* POST 'Add review' page */
 module.exports.doAddReview = function(req, res){
-  console.log("yo bhayo");
+  //console.log("yo bhayo");
   var requestOptions, path, cuisineid, postdata;
   cuisineid = req.params.cuisineid;
   path = "/api/cuisines/" + cuisineid + '/reviews';
@@ -142,7 +140,7 @@ module.exports.doAddReview = function(req, res){
     json : postdata
   };
   if (!postdata.author || !postdata.rating || !postdata.reviewText) {
-    res.redirect('/cuisine/' + cuisineid + '/reviews/new?err=val');
+    res.redirect('/cuisine/' + cuisineid + '/review/new?err=val');
   } else {
     request(
       requestOptions,
@@ -150,9 +148,9 @@ module.exports.doAddReview = function(req, res){
         if (response.statusCode === 201) {
           res.redirect('/cuisine/' + cuisineid);
         } else if (response.statusCode === 400 && body.name && body.name === "ValidationError" ) {
-          res.redirect('/cuisine/' + cuisineid + '/reviews/new?err=val');
+          res.redirect('/cuisine/' + cuisineid + '/review/new?err=val');
         } else {
-          console.log(body);
+          //console.log(body);
           _showError(req, res, response.statusCode);
         }
       }
