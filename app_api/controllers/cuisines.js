@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Cus = mongoose.model('Cuisine');
 
 var sendJSONresponse = function(res, status, content) {
-  //console.log("Problem here");
+  //onsole.log("Problem here");
   res.status(status);
   
   res.json(content);
