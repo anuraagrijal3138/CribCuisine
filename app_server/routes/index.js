@@ -5,13 +5,15 @@ var router = express.Router();
 var ctrlCuisineAds = require('../controllers/cuisineAds');
 var ctrlOthers = require('../controllers/others');
 
-/* cuisine pages */
-router.get('/', ctrlCuisineAds.homelist);
+router.get('/', ctrlOthers.angularApp);
+/* express routes won't be used for now 
 router.get('/cuisine/:cuisineid', ctrlCuisineAds.cuisineInfo);
 router.get('/cuisine/:cuisineid/review/new', ctrlCuisineAds.addReview);
 router.post('/cuisine/:cuisineid/review/new', ctrlCuisineAds.doAddReview);
 
-/* Other pages */
+/* Other pages 
 router.get('/about', ctrlOthers.about);
+*/
+
 
 module.exports = router;

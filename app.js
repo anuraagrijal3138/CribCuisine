@@ -1,4 +1,6 @@
 var express = require('express');
+
+
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,7 +11,7 @@ require('./app_api/models/db');
 var app = express();
 
 
-
+app.use(express.static(path.join(__dirname, 'app_client')));
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
