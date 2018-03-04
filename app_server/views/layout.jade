@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app='cribCuisineApp')
   head
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
@@ -26,6 +26,11 @@ html
         .row
           .col-xs-12
             small &copy; Team Utilitarian 2018
- script(src='/javascripts/jquery-1.11.1.min.js')
- script(src='/bootstrap/js/bootstrap.min.js')
- script(src='/javascripts/validation.js')
+
+script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js")   
+script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-route.js")
+script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.js")
+script(src='/angular/cribCuisineApp.js')
+script(src='/javascripts/jquery-1.11.1.min.js')
+script(src='/bootstrap/js/bootstrap.min.js')
+script(src='/javascripts/validation.js')

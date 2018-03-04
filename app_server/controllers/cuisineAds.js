@@ -42,8 +42,7 @@ var renderHomepage = function(req, res, responseBody){
       strapline: 'Find people who wil offer you healthy home mad cuisines! '
     },
     sidebar: "Looking for homemade food? Search no more.",
-    cuisines: responseBody,
-    message: message
+
   });
 };
 
