@@ -9,12 +9,15 @@ block content
         h1= pageHeader.title
          small &nbsp;#{pageHeader.strapline}
   .row
-    .col-xs-12.col-sm-8(ng-controller="cuisineListCtrl") 
-      .error{{ message }}
+   .col-xs-12.col-sm-8(ng-controller="cuisineListCtrl")
+    label(for="filter") Filter results
+    input#filter(type="text", name="filter", ng-model="textFilter")
+    .error {{ message }}
        .row.list-group 
-          .col-xs-12.list-group-item(ng-repeat="cuisine in data.cuisines")
+          .col-xs-12.list-group-item(ng-repeat="cuisine in data.cuisines | filter : textFilter")
             h4 
               a(href="/cuisine/{{cuisine._id}}") {{cuisine.name}}
+              small.rating-stars(rating-stars, rating="cuisine.rating")
             p
                cuisine{{cuisine.intro}}
                address {{cuisine.address}}
