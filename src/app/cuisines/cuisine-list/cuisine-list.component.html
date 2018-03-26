@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-xs-12">
+        <a 
+        href="#" 
+        class="list-group-item clearfix"
+        *ngFor="let cuisine of cuisines">
+            <div class="pull-left">
+                <h4 class="list-group-item-heading">{{ cuisine.name }}</h4>
+                <p class="list-group-item-text">{{ cuisine.intro }}</p>
+            </div>
+            <span class="pull-right">
+                <img 
+                [src]= "cuisine.imagePath"
+                alt="{{ cuisine.name }}" 
+                class="img-responnsive" 
+                style="max-height: 50px;">
+            </span>
+        </a>
+        <app-cuisine-item></app-cuisine-item>    
+    </div>
+</div>
