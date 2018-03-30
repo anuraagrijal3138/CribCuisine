@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Cuisine } from '../cuisine';
+import { Cuisine } from '../../cuisines/cuisine.model';
 
 @Component({
   selector: 'app-cuisine-form',
@@ -8,7 +8,7 @@ import { Cuisine } from '../cuisine';
 })
 export class CuisineFormComponent implements OnInit {
 	
-	model = new Cuisine();
+	model : Cuisine;
 
 	submitted = false;
 	@Output() onSubmitted = new EventEmitter<Cuisine>();	

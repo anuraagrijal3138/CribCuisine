@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { ServerService } from '../server.service';
-import { Cuisine } from './cuisine';
+import { CuisinesService } from '../cuisines/cuisines.service';
+import { Cuisine } from '../cuisines/cuisine.model';
 
 @Component({
   selector: 'app-post-cuisine',
@@ -12,14 +12,14 @@ export class PostCuisineComponent {
 
 
 cuisineitem = {};
-  constructor(private serverService: ServerService) {}
+  constructor(private serverService: CuisinesService) {}
 
   onSave() {
-    this.serverService.storeCuisine(this.cuisineitem)
-      .subscribe(
-        (response) => console.log(response),
-        (error) => console.log(error)
-      );
+ //   this.serverService.storeCuisine(this.cuisineitem)
+  //    .subscribe(
+   //     (response) => console.log(response),
+    //    (error) => console.log(error)
+     // );
   }
 	
 	onSubmitted(model: Cuisine){
@@ -28,4 +28,5 @@ cuisineitem = {};
 		this.cuisineitem= model;
 		this.onSave();
 
+}
 }

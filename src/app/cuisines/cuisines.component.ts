@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { CuisinesService } from './cuisines.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'app-cuisines',
-  templateUrl: './cuisines.component.html',
+	selector: 'app-cuisines',
+	templateUrl: './cuisines.component.html',
+	providers: [ CuisinesService ],
   styleUrls: ['./cuisines.component.css']
 })
-export class CuisinesComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CuisinesComponent {
+	constructor(cuisinesService: CuisinesService){
+		cuisinesService.getCuisines().subscribe(val => console.log(val));
+		//console.log(cuisinesService.getCuisines());
+		
+	}
 }
+
+
