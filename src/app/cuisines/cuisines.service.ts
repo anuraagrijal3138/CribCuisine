@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
@@ -10,6 +10,9 @@ export interface Cuisine {
 
 @Injectable()
 export class CuisinesService {
+
+	cuisineSelected = new EventEmitter<any>();
+
 	cuisines : Observable<any[]>;	
 	constructor(db: AngularFireDatabase){
 		console.log('now logging db');
@@ -19,7 +22,9 @@ export class CuisinesService {
 
 	getCuisines() { 
 		console.log(this.cuisines);
-		return this.cuisines; }
+		return this.cuisineSelected; 
+	}
+
 }
 
 

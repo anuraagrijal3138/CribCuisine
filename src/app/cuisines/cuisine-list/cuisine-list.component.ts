@@ -13,9 +13,9 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CuisineListComponent  {
 	
-	 cuisines : Observable<any[]>;
+	cuisines : Observable<any[]>;
 	constructor(cuisinesService: CuisinesService){
-		console.log("Inside cuisineListComponent");
+		console.log(this.cuisines);
 		this.cuisines = cuisinesService.cuisines;
 	}
 

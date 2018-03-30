@@ -1,37 +1,22 @@
 <div class="row">
   <div class="col-xs-12">
     <h1>
-      {{ "name" }}
+      {{ cuisine.name }}
     </h1>
+  </div>  
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <img src="{{ cuisine.image }}" 
+    alt="{{ cuisine.name }}" class="img-responsive"
+    style = "max-height: 300px;">
   </div>
 </div>
 
 <div class="row">
   <div class="col-xs-12">
-    <img src="cuisine.image" alt="" class="img-responsive">
+    {{ cuisine.intro }}
   </div>
 </div>
-
-<hr>
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-info">
-      <div class="panel-heading">cuisine.name</div>
-      <div class="panel-body">cuisine.intro</div>
-    </div>
-  </div>
-</div> 
-<hr> 
-
-<div class="row">
-  <div class="col-xs-12">
-    <div class="panel panel-info">
-      <div class="panel-heading">Hosting Hours</div>
-      <div class="panel-body">Date</div>
-      <div class="panel-body">Hours</div>
-    </div>
-  </div>
-</div> 
-
-
 

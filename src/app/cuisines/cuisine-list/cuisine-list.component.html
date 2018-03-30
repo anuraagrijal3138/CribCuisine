@@ -1,25 +1,8 @@
 <div class="row">
         
     <div class="col-xs-12">
-           
-        <a 
-        
-        class="list-group-item clearfix"
-        *ngFor="let cuisine of (cuisines | async)">
-        <!-- <h4 class="list-group-item-heading">"all"</h4> -->
-            <div class="pull-left">
-                <h4 class="list-group-item-heading">{{ cuisine.name }}</h4>
-                <p class="list-group-item-text">{{ cuisine.intro }}</p>
-                <!-- <p ng-src class="list-group-item-text">{{ cuisine.image }}</p> -->
-            </div>
-            <span class="pull-right">
-                <img 
-                [src]= "cuisine.image"
-                alt="{{ cuisine.name }}" 
-                class="img-responnsive" 
-                style="max-height: 50px;">
-            </span>
-            <app-cuisine-detail [cuisine]="cuisine"></app-cuisine-detail>
-        </a>
+           <app-cuisine-item 
+           *ngFor="let cuisineEl of (cuisines | async)"
+           [cuisine] = "cuisineEl"></app-cuisine-item>
     </div>
 </div>

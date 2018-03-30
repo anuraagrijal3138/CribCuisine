@@ -17,7 +17,6 @@ import { PostCuisineComponent } from './post-cuisine/post-cuisine.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
-import { CuisinesService } from './cuisines/cuisines.service';
 import { CuisineFormComponent } from './post-cuisine/cuisine-form/cuisine-form.component';
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -44,7 +43,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 		AngularFirestoreModule
 		
   ],
-  providers: [CuisinesService, AngularFireDatabase],
+  providers: [AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

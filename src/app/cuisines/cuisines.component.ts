@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { CuisinesService } from './cuisines.service';
 import { Observable } from 'rxjs/Observable';
@@ -10,11 +10,21 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./cuisines.component.css']
 })
 export class CuisinesComponent {
-	constructor(cuisinesService: CuisinesService){
-		cuisinesService.getCuisines().subscribe(val => console.log(val));
-		//console.log(cuisinesService.getCuisines());
+	selectedCuisine: any;
+
+	constructor(private cuisinesService: CuisinesService){
+		// console.log("asasas");
+		// cuisinesService.getCuisines().subscribe(val => console.log(val));
+		// console.log(cuisinesService.getCuisines());
 		
 	}
+	ngOnInit() {
+		this.cuisinesService.cuisineSelected
+			.subscribe(
+				(cuisine : any) => {
+					this.selectedCuisine = cuisine;
+				}
+			);
+	}
 }
-
 

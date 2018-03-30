@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CuisinesService } from '../../cuisines.service';
+import { Observable } from 'rxjs/Observable';
+
+import { Cuisine } from '../../cuisine.model';
 
 @Component({
   selector: 'app-cuisine-item',
@@ -6,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cuisine-item.component.css']
 })
 export class CuisineItemComponent implements OnInit {
-
-  constructor() { }
+  
+  @Input() cuisine: any;
+  
+  constructor(private cuisinesService: CuisinesService) {}
 
   ngOnInit() {
+  }
+
+  onSelected() {
+    console.log(this.cuisine);
+    this.cuisinesService.cuisineSelected.emit(this.cuisine);
   }
 
 }
