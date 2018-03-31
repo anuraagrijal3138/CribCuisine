@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
-import { CuisinesService } from '../cuisines/cuisines.service';
-import { Cuisine } from '../cuisines/cuisine.model';
+import { Component, OnInit, EventEmitter} from '@angular/core';
+
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+
+
 
 @Component({
   selector: 'app-post-cuisine',
@@ -9,24 +11,17 @@ import { Cuisine } from '../cuisines/cuisine.model';
   styleUrls: ['./post-cuisine.component.css']
 })
 export class PostCuisineComponent {
+  cuisineSelected = new EventEmitter<any>();
 
+	cuisines : Observable<any[]>;	
+	constructor(db: AngularFireDatabase){
+		console.log('now logging db');
+		//console.log(db.collection('data'));
+		this.cuisines = db.list('data').valueChanges();
+	}
 
-cuisineitem = {};
-  constructor(private serverService: CuisinesService) {}
-
-  onSave() {
- //   this.serverService.storeCuisine(this.cuisineitem)
-  //    .subscribe(
-   //     (response) => console.log(response),
-    //    (error) => console.log(error)
-     // );
-  }
-	
-	onSubmitted(model: Cuisine){
-		console.log(model);
-		console.log(5);
-		this.cuisineitem= model;
-		this.onSave();
-
-}
+	getCuisines() { 
+		console.log(this.cuisines);
+		return this.cuisineSelected; 
+	}
 }

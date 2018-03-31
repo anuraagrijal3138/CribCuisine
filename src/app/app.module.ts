@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+//load the environment file that we edited
 import { environment } from '../environments/environment';
 
 
@@ -18,7 +16,12 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CuisineFormComponent } from './post-cuisine/cuisine-form/cuisine-form.component';
-import { AngularFireDatabase } from 'angularfire2/database';
+
+//database handle
+import { AngularFireModule } from 'angularfire2';
+import { CuisinesService } from './cuisines/cuisines.service';
+import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
+
 
 
 @NgModule({
@@ -36,14 +39,12 @@ import { AngularFireDatabase } from 'angularfire2/database';
   imports: [
     BrowserModule,
     AppRoutingModule,
-		HttpModule,
 		FormsModule,
-		HttpClientModule,
-		AngularFireModule.initializeApp(environment.firebase),
-		AngularFirestoreModule
+    AngularFireModule.initializeApp(environment.firebase),
+
 		
   ],
-  providers: [AngularFireDatabase],
+  providers: [CuisinesService, AngularFireDatabase, AngularFireDatabaseModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

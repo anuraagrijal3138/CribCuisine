@@ -1,5 +1,17 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Cuisine } from '../../cuisines/cuisine.model';
+// for import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabaseModule, AngularFireList, AngularFireDatabase} from 'angularfire2/database';
+
+export class Cuisine {
+
+  constructor(
+    public name: string,
+    public intro: string,
+    public image: string
+  ) {  }
+
+}
 
 @Component({
   selector: 'app-cuisine-form',
@@ -8,20 +20,23 @@ import { Cuisine } from '../../cuisines/cuisine.model';
 })
 export class CuisineFormComponent implements OnInit {
 	
-	model : Cuisine;
-
+	model  = new Cuisine('name', 'Intor', 'Chuck Overstreet');
 	submitted = false;
-	@Output() onSubmitted = new EventEmitter<Cuisine>();	
+
+	constructor( db: AngularFireDatabase) {		
+			console.log(db);
+			const itemsRef = db.list('data');
+			itemsRef.push({ name: "tried from database" });				
+		
+	}
 	onSubmit() {
 
-		this.submitted = true;
-		console.log(this.model);
-		this.onSubmitted.emit(this.model);
-}
-  constructor() { }
+
+	}
 	
 
   ngOnInit() {
+		this.submitted = false;	
   }
 
 }

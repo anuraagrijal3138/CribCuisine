@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 @Component({
 	selector: 'app-cuisines',
 	templateUrl: './cuisines.component.html',
-	providers: [ CuisinesService ],
   styleUrls: ['./cuisines.component.css']
 })
 export class CuisinesComponent {
