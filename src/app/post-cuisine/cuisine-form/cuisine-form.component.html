@@ -1,77 +1,71 @@
-<!-- <div [hidden]="submitted">
-    <h1>Post Cuisine</h1>
-    <form (ngSubmit)="onSubmit()"  #cuisineForm="ngForm">
-
-      <div class="form-group">
-        <label for="name">Cuisine Name</label>
-        <input type="text" class="form-control" id="name" 
-							 [(ngModel)]="model.name" name="name">
-      </div>
-
-
-      <div class="form-group">
-        <label for="intro">Intro</label>
-        <input type="text" class="form-control" id="intro" 
-							 [(ngModel)]="model.intro" name="intro">
-      </div>
-
-      <div class="form-group">
-        <label for="address">Image</label>
-        <input type="text" class="form-control" id="image"
-							 [(ngModel)]="model.image" name="image">
-      </div>
-
-
-      <button type="submit" class="btn btn-success" [disabled]="!cuisineForm.form.valid" >Submit</button>
-
-    </form>
-</div> -->
-
 <div [hidden]="submitted">
   <h1>Post Cuisine</h1>
   <form (ngSubmit)="onSubmit()"  #cuisineForm="ngForm">
 
     <div class="form-group">
       <label for="name">Cuisine Name</label>
-      <input type="text" class="form-control" id="name" 
-              >
+      <input 
+      type="text" 
+      class="form-control" 
+      required
+      name="name"
+      ngModel
+      #name = "ngModel"
+      >
+      <span class="help_block" *ngIf = "!name.valid && name.touched">Please enter a valid name.</span>
     </div>
 
 
     <div class="form-group">
       <label for="intro">Intro</label>
-      <input type="text" class="form-control" id="intro" 
-              >
+      <input 
+      type="text" 
+      class="form-control" 
+      required
+      name="intro" 
+      ngModel
+      #intro = "ngModel"
+      >
+      <span class="help_block" *ngIf = "!intro.valid && intro.touched">Please enter a valid intro.</span>
     </div>
 
     <div class="form-group">
       <label for="address">Image</label>
-      <input type="text" class="form-control" id="image"
-              >
+      <input 
+      type="text" 
+      class="form-control" 
+      required
+      name="image"
+      ngModel
+      #image = "ngModel"
+    >
+    <span class="help_block" *ngIf = "!image.valid && image.touched">Please enter a valid image.</span>
     </div>
 
 
-    <button  class="btn btn-success">Submit</button>
+    <button  
+    class="btn btn-success"
+    type="submit">Submit</button>
 
   </form>
 </div>
 
-<div >
+<div [hidden]="!submitted">
   <h2>You submitted the following:</h2>
 
   <div class="row">
     <div class="col-xs-3">Cuisine Name</div>
-    <div class="col-xs-9  pull-left">{{ model.name }}</div>
+    <div class="col-xs-9  pull-left">{{ singleCuisine.name }}</div>
   </div>
 
   <div class="row">
     <div class="col-xs-3">Intro</div>
-    <div class="col-xs-9 pull-left">{{ model.intro }}</div>
+    <div class="col-xs-9 pull-left">{{ singleCuisine.intro }}</div>
   </div>
 
   <div class="row">
     <div class="col-xs-3">Image</div>
-    <div class="col-xs-9 pull-left">{{ model.image }}</div>
+    <div class="col-xs-9 pull-left">{{ singleCuisine.image }}</div>
   </div>
 
   <br>
