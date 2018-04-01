@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-// for import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabaseModule, AngularFireList, AngularFireDatabase} from 'angularfire2/database';
-=======
  import { Component,  Output, EventEmitter, ViewChild} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +5,6 @@ import { AngularFireDatabaseModule, AngularFireObject, AngularFireList, AngularF
 
 
 //import { Component, OnInit, ViewChild } from '@angular/core';
->>>>>>> b0ac34d1233a9f4f69b411cb385fa153ad28848e
 import { NgForm } from '@angular/forms';
 
 export class Cuisine {
