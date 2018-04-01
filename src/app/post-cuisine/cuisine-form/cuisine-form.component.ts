@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 // for import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabaseModule, AngularFireList, AngularFireDatabase} from 'angularfire2/database';
+import { NgForm } from '@angular/forms';
 
 export class Cuisine {
 
@@ -19,24 +20,35 @@ export class Cuisine {
   styleUrls: ['./cuisine-form.component.css']
 })
 export class CuisineFormComponent implements OnInit {
-	
-	model  = new Cuisine('name', 'Intor', 'Chuck Overstreet');
-	submitted = false;
+	// cuisinesRef: AngularFireList<any>;
+	// cuisines: Observable<any[]>;	
+	submitted: boolean;
 
-	constructor( db: AngularFireDatabase) {		
-			console.log(db);
-			const itemsRef = db.list('data');
-			itemsRef.push({ name: "tried from database" });				
-		
-	}
-	onSubmit() {
+  @ViewChild('cuisineForm') singleCuisine: NgForm;
 
+  itemsRef: AngularFireList<any>;
+  items: Observable<any[]>;
 
-	}
-	
+	constructor( db: AngularFireDatabase) {	
+		this.itemsRef = db.list('data');
+    this.items = this.itemsRef.valueChanges();
+    console.log(this.items);
+		//  this.cuisines = this.cuisinesRef.valueChanges().map(changes => {
+		// 	 return changes.map(c => ({key: c.payload.key, ...c.payload.val() }))
+		//  });
+		//  console.log(this.singleCuisine);
+	//  }
 
+	//  addItem(newName : any) {
+	// 	 this.cuisinesRef.push({ name: newName });
+
+	// 	 }
+  }
   ngOnInit() {
 		this.submitted = false;	
   }
-
+  onSubmit() { 
+    this.submitted = true;
+		this.itemsRef.push(this.singleCuisine.value);
+  }
 }

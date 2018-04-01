@@ -45,7 +45,8 @@
 
     <button  
     class="btn btn-success"
-    type="submit">Submit</button>
+    type="submit"
+    [disabled] = "!cuisineForm.valid">Submit</button>
 
   </form>
 </div>
@@ -55,17 +56,17 @@
 
   <div class="row">
     <div class="col-xs-3">Cuisine Name</div>
-    <div class="col-xs-9  pull-left">{{ singleCuisine.name }}</div>
+    <div class="col-xs-9  pull-left">{{ singleCuisine.value.name }}</div>
   </div>
 
   <div class="row">
     <div class="col-xs-3">Intro</div>
-    <div class="col-xs-9 pull-left">{{ singleCuisine.intro }}</div>
+    <div class="col-xs-9 pull-left">{{ singleCuisine.value.intro }}</div>
   </div>
 
   <div class="row">
     <div class="col-xs-3">Image</div>
-    <div class="col-xs-9 pull-left">{{ singleCuisine.image }}</div>
+    <div class="col-xs-9 pull-left">{{ singleCuisine.value.image }}</div>
   </div>
 
   <br>
