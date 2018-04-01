@@ -1,4 +1,4 @@
- import { Component,  Output, EventEmitter, ViewChild} from '@angular/core';
+ import { Component,  Output, EventEmitter, ViewChild, OnInit} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabaseModule, AngularFireObject, AngularFireList, AngularFireDatabase} from 'angularfire2/database';
