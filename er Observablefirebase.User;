@@ -1,0 +1,219 @@
+[33mcommit d20474a56bf21bb9df4242ac96afe24f80f65f8e[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Mon Apr 2 00:32:44 2018 -0400
+
+    Small
+
+[33mcommit 456bfbd21840cd2c70d45f13225f9519b2d5490f[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sun Apr 1 23:33:42 2018 -0400
+
+    Login with Google
+
+[33mcommit 050f21847f6e290b599a8bd18fa0248634b69d33[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Mar 31 21:01:28 2018 -0400
+
+    Small changes
+
+[33mcommit a109da78b2df03098726f8371abd4efc1f3bd6c2[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Mar 31 20:58:06 2018 -0400
+
+    Small changes
+
+[33mcommit 9ba1508a6b665f492f9bffad5d9a4231ac9c169b[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Mar 31 20:57:00 2018 -0400
+
+    Small changes
+
+[33mcommit 445d3ed81bf16e3bea9e6519127e8f2b505f8e7d[m
+Merge: 40c510e b0ac34d
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Mar 31 20:52:41 2018 -0400
+
+    Changes
+
+[33mcommit 40c510e6cf84bb8ed43680529a4d75fab01ca45a[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Mar 31 20:46:26 2018 -0400
+
+    Post cuisine works
+
+[33mcommit b0ac34d1233a9f4f69b411cb385fa153ad28848e[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Mar 31 20:06:23 2018 -0400
+
+    update: cuisine form component added
+
+[33mcommit ee3bf08a462186d10ab66d56244130ae1ec65bcc[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Mar 31 17:52:44 2018 -0400
+
+    html updated ts file not
+
+[33mcommit 1bfb8ef1ed098aec2ae6dd20fcb83334f3df7797[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Mar 31 17:37:50 2018 -0400
+
+    post to database method works
+
+[33mcommit a3e4be47c6d4fb7bf2b6d76bead0d38e2fc17ed3[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Fri Mar 30 07:50:46 2018 -0400
+
+    cuisine-details works now
+
+[33mcommit e376cdfb5ddd44c1c848ce7d15351591eff5dc45[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Thu Mar 29 22:06:14 2018 -0400
+
+    Post form connection broken parent-calls-child for front end change'
+
+[33mcommit db671f99a41c11f1ae7463c6f0aee54d4101f772[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Tue Mar 27 08:57:05 2018 -0400
+
+    all changes
+
+[33mcommit 12dea12b86591b4778c58752bec7a3c4dd780486[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Mon Mar 26 16:25:29 2018 -0400
+
+    angular stuff
+
+[33mcommit 7bd06ae30d06625ba2dded3e9def3bbf46eceab8[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sun Mar 4 10:52:06 2018 -0500
+
+    fails to render the view pagess
+
+[33mcommit 74c2ca37114bbb582ab02ab3f907a0fa2b1ff8aa[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sun Mar 4 10:31:28 2018 -0500
+
+    SPA structure Done
+
+[33mcommit 938aa706a69c198e332e652d1d74bc81ffb94bce[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sun Mar 4 09:30:56 2018 -0500
+
+    SPA basic structure set-up
+
+[33mcommit 1a13364a8cd99e6901e2de152f91c2a8de996751[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sun Mar 4 06:14:03 2018 -0500
+
+    filters cuisines based on user input
+
+[33mcommit 554db212287ac049a74d2d96734ff3d2d698f892[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sun Mar 4 03:53:40 2018 -0500
+
+    angular bind success with hard coded data
+
+[33mcommit 2e9a7136d9595ca399590a7696f25e774e80d52c[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Mar 3 17:37:27 2018 -0500
+
+    small change
+
+[33mcommit 2244ee268ba52743223da322a6fbe635d6bca9ec[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Fri Mar 2 22:34:14 2018 -0500
+
+    Error tracking done and alert signal for incomplete data
+
+[33mcommit 008bf84c688661e5c2d0990ad5f5f48338ce709b[m
+Merge: efcd620 9b05ab8
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Thu Mar 1 06:18:25 2018 -0500
+
+    Merge pull request #1 from anuraagrijal3138/consumingAPI
+    
+    Except for Angular done!
+
+[33mcommit 9b05ab862bf7baaea9d05d4c5e31f1ade5eafd1d[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Thu Mar 1 06:16:08 2018 -0500
+
+    Done with routing and api
+
+[33mcommit 5d4959d06ba8cbdedebd579b7c117d32e784bf3c[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Wed Feb 28 20:00:25 2018 -0500
+
+    API for getting list of cuisines complete
+
+[33mcommit bef241922d539b178d985229891fcd9b6cd739b0[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Wed Feb 28 17:03:18 2018 -0500
+
+    Post method works from postman
+
+[33mcommit efcd62054c93b4fd7f788b28f07b1b63f753be63[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Mon Feb 26 04:55:56 2018 -0500
+
+    can talk to live database successfully
+
+[33mcommit f49dd617512c5b81a62bf9c0305c6278712bba96[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sun Feb 25 20:24:03 2018 -0500
+
+    added live database
+
+[33mcommit ebd660bf8fb3e86564bbbc1b41d3cee4218fbe9e[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sun Feb 25 13:25:54 2018 -0500
+
+    removed data from view template, moved to controller
+
+[33mcommit 1ef163fd1947402e5e5bb03370dfdc1808c18bfe[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Feb 24 18:17:40 2018 -0500
+
+    error correction
+
+[33mcommit e5e0171fc092e27aa0a3037a621c1d5dfb392559[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Feb 24 17:46:59 2018 -0500
+
+    review template successfuly redering
+
+[33mcommit 27f33c8903dfcdaa37b1abe51e9eee92cf352252[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Feb 24 17:10:48 2018 -0500
+
+    Adding view templates
+
+[33mcommit f042a3fc1ed1f0b289148ce84c336f5c63da3f07[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Feb 24 15:59:08 2018 -0500
+
+    added four controllers for four pages
+
+[33mcommit b509bc2c9a0ebaf421163720d8b6954cbeb54649[m
+Author: ashimpaudel <ashimpaudel@gmail.com>
+Date:   Sat Feb 24 14:54:41 2018 -0500
+
+    initial setup mvc
+
+[33mcommit 647ad156ecc53f13bf29e3f53e9dfea5fd849173[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Nov 18 18:10:53 2017 -0500
+
+    registration and login
+
+[33mcommit f6993499ac0cf8f5ccc1cc276c525af2c1caac99[m
+Author: Anuraag Rijal <anuraag.rijal@bison.howard.edu>
+Date:   Sat Nov 18 16:27:54 2017 -0500
+
+    First Commit
+
+[33mcommit 5185969f9c3bc32b7a1c9874034f3aee7debb474[m
+Author: anuraagrijal3138 <anuraag.rijal@bison.howard.edu>
+Date:   Sat Nov 18 16:24:15 2017 -0500
+
+    Initial commit

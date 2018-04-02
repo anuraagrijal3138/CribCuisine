@@ -23,6 +23,7 @@ import { CuisinesService } from './cuisines/cuisines.service';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthService } from './auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthGuardService } from './auth-guard.service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 		FormsModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [CuisinesService, AngularFireDatabase, AngularFireDatabaseModule,
+  providers: [CuisinesService, AuthGuardService, AngularFireDatabase, AngularFireDatabaseModule,
     AuthService, AngularFireAuth],
   bootstrap: [AppComponent]
 })

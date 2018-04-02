@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { AuthGuardService } from '../auth-guard.service';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class HeaderComponent {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private authGuard:AuthGuardService) {}
 
 }
