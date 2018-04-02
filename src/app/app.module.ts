@@ -21,7 +21,8 @@ import { CuisineFormComponent } from './post-cuisine/cuisine-form/cuisine-form.c
 import { AngularFireModule } from 'angularfire2';
 import { CuisinesService } from './cuisines/cuisines.service';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
-
+import { AuthService } from './auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @NgModule({
@@ -34,17 +35,16 @@ import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/dat
     PostCuisineComponent,
     HeaderComponent,
     HomepageComponent,
-    CuisineFormComponent,
+    CuisineFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
 		FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-
-		
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [CuisinesService, AngularFireDatabase, AngularFireDatabaseModule],
+  providers: [CuisinesService, AngularFireDatabase, AngularFireDatabaseModule,
+    AuthService, AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

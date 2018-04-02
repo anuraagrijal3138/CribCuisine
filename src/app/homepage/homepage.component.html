@@ -1,26 +1,135 @@
-<!-- Navbar -->
-<nav class="navbar navbar-default navbar-fixed-top" id="my-navbar">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+<!-- jumbotron-->
 
-      <a href="" class="navbar-brand">Wiredwiki</a>
-    </div><!-- Navbar Header-->
-    <div class="collapse navbar-collapse" id="navbar-collapse">
-      
-    <a href="" class="btn btn-warning navbar-btn navbar-right">Download Now</a>
-      <ul class="nav navbar-nav">
-        <li><a href="#feedback">Feedback</a> 
-        <li><a href="#gallery">Gallery</a> 
-        <li><a href="#features">Features</a> 
-        <li><a href="#faq">Faq</a> 
-        <li><a href="#contact">ContactUs</a> 
-      </ul>
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>CribCuisine</h1>
+    <p> Find delicious homemade food near you. </p>
+
+    <div class="btn-group">
+      <a (click)="signInWithGoogle()" class="btn btn-lg btn-warning">Login with Google!</a>
     </div>
-  </div><!-- End Container-->
-</nav><!-- End navbar -->
+  </div><!-- End container -->
+</div><!-- End jumbotron-->
+
+<div class="container">
+  <section>
+    <div class="page-header" id="order">
+      <h2>Order.<small> Easily order online!</small></h2>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <img src="https://securecdn.pymnts.com/wp-content/uploads/2014/06/Online-Ordering-Feature.jpg" alt="" class="img-responsive">
+      </div>
+      <div class="col-lg-6" id="order">
+          <h3>Order food Online!</h3>
+          <p>Browse the menu and order the food of your choice.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="container">
+    <section>
+        <div class="page-header" id="choose">
+            <h2>Choose.<small> Choose whee to eat!</small></h2>
+          </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <h3>Eat in or Take Out!</h3>
+          <p>Decide whether to eat in host's place or take food out.</p>
+        </div>
+        <div class="col-lg-6">
+            <img src="http://www.neonsignkingdom.com/media/catalog/product/cache/1/small_image/430x404/0f396e8a55728e79b48334e699243c07/e/a/eat-in-take-out-oval-with-blue-border-neon-sign.jpg" alt="" class="img-responsive">
+        </div>
+      </div>
+    </section>
+</div>
+
+<div class="container">
+    <section>
+        <div class="page-header" id="enjoy">
+            <h2>Enjoy.<small> Enjoy your food!</small></h2>
+          </div>
+
+      <div class="row">
+          <div class="col-lg-6" id="enjoy">
+              <img src="http://images.wisegeek.com/woman-in-gray-eating-sushi-with-chopsticks.jpg" alt="" class="img-responsive">
+          </div>
+        <div class="col-lg-6">
+          <h3>Enjoy yor food.</h3>
+          <p>Food of your choice.</p>
+        </div>
+      </div>
+    </section>
+</div>
+
+<div class="container">
+  <section>
+      <div class="page-header" id="contact">
+          <h2>Contact Us.<small> Give feedback!</small></h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <address>
+              <strong>CribCuisine Pvt Ltd.</strong><br>
+              anuraagrijal@gmail.com<br>
+              ashimpaudel@gmail.com<br>
+              P: (111) 111-1111
+            </address>
+          </div>
+          <div class="col-lg-8">
+            <form action="" class="form-horizontal">
+              <div class="form-group">
+                <label for="user-name" class="col-lg-2 control-label">
+                  Name
+                </label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="user-name" placeholder="Enter you name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                  <label for="user-email" class="col-lg-2 control-label">Email</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="user-email" placeholder="Enter you Email Address">
+                  </div>
+                </div><!-- End form group -->
+  
+                <div class="form-group">
+                  <label for="user-url" class="col-lg-2 control-label">Your Website</label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control" id="user-email" placeholder="If you have Any.">
+                  </div>
+                </div><!-- End form group -->
+  
+                <div class="form-group">
+                  <label for="user-message" class="col-lg-2 control-label">Any Message</label>
+                  <div class="col-lg-10">
+                    <textarea name="user-message" id="user-message" class="form-control" 
+                    cols="20" rows="10" placeholder="Enter your Message"></textarea>
+                  </div>
+                </div><!-- End form group -->
+  
+                <div class="form-group">
+                  <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+            </form>
+          </div>
+        </div>
+
+  </section>
+</div>
+
+<footer>
+  <hr>
+  <div class="container text-center">
+      <p>&copy; Copyright @ Team Utilitarian 2017</p>
+  </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
