@@ -11,12 +11,5 @@ import * as firebase from 'firebase/app';
   providers: [AngularFireAuth]
 })
 export class PostCuisineComponent {
-  constructor(public afAuth: AngularFireAuth) {
-  }
-  login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
-  logout() {
-    this.afAuth.auth.signOut();
-  }
+  constructor() {}
 }

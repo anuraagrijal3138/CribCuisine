@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 
 export class AuthService {
   private user: Observable<firebase.User>;
+  private userDetails: firebase.User = null;
+
   constructor(private _firebaseAuth: AngularFireAuth, private router: Router) { 
     this.user = _firebaseAuth.authState;
   }
@@ -18,4 +20,16 @@ export class AuthService {
     )
   }
 
-}
+  isLoggedIn() {
+    if (this.userDetails == null ) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+  logout() {
+      this._firebaseAuth.auth.signOut()
+      .then((res) => this.router.navigate(['/']));
+    }
+  }
