@@ -12,7 +12,7 @@ const appRoutes: Routes = [
     { path:'home', component: HomepageComponent },
     { path: 'post-ads', component: PostCuisineComponent },
     { path: 'cuisines',
-        canActivate: [AuthGuardService],
+        //canActivate: [AuthGuardService],
         component: CuisinesComponent }
 ];
 

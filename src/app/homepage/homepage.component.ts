@@ -8,23 +8,50 @@ import { Router } from '@angular/router';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent {
-  userEmail: string = '';
+  email: Promise<String>;
   constructor(private authService: AuthService,
-    private router: Router) { }
+              private router: Router) {
+                
+               }
 
   signInWithGoogle() {
-    this.authService.googleLogin()
-    .then((response)=>{
-      console.log("Utsab dai we want your new album");
-      console.log(typeof(response))
-      if(response){
-        this.router.navigateByUrl("/cuisines")
-      }
-      else{
-        this.authService.delete;
-      }
-    })
-      .catch((error)=>this.router.initialNavigation );
-  }
-}
+    this.email= this.authService.signInWithGoogle()
+      .then(function (success){
+        console.log("success printing");
+        console.log(success);
+        //check if the user is a howard student?
+        if (success.user.email.endsWith("howard.edu")) {
+          console.log("Will grant the access");
+          return success.user.email;
+          
+        } else {
+          return Promise.reject(new Error('not a Bison'))
+
+        }
+      })
+      .catch(function (error){
+        console.log("singInwithGoogle Error: "+error)
+        return Promise.reject(new Error('not a Bison'))
+      });
+
   
+    }
+    login(){
+      this.signInWithGoogle();
+      this.email.then(
+        (success)=>{
+          console.log('under login navigation');
+          this.router.navigateByUrl("/cuisines").then(
+            (success) => console.log("successfull navigation")
+          )
+        }
+      ).catch(
+        (error) =>{
+          this.authService.singOut;
+          window.alert("This is a Bison Privelege, try with howard email")
+          this.router.navigateByUrl("/").then(
+            (success) => console.log("successfully rejected routing")
+          )}
+      )
+    }
+  }
