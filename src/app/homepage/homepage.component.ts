@@ -13,17 +13,18 @@ export class HomepageComponent {
               private router:Router) {}
 
   signInWithGoogle() {
-    this.authService.signInWithGoogle()
-    .then((res) => {
-      this.userEmail = res.additionalUserInfo.profile.email;
-      if (this.userEmail.endsWith("howard.edu")) {
-        this.router.navigate(['cuisines'])
-      } else {
-        console.log("Error bhayo");
-        this.router.navigate([''])
-      }        
-      })
-    .catch((err) => console.log(err));
+    //console.log(this.authService.isLoggedIn);
+    this.authService.login();
+    this.authService.user.subscribe(result =>
+      {       
+          if(result != null){
+            this.router.navigateByUrl('/cuisines');
+          }
+          else{
+            this.router.navigateByUrl('/home');
+          }
+      }
+    );
   }
 
 

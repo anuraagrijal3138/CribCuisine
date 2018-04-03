@@ -1,52 +1,68 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
+import {AngularFireModule} from 'angularfire2';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
+export class AuthService {
+  //code copied straight from : https://github.com/angular/angularfire2/blob/master/docs/version-4-upgrade.md
+  user: Observable<firebase.User>;
+  email : String;
+  deleteU : boolean = false;
 
-export class AuthService implements OnInit{
-  private user: Observable<firebase.User>;
-  private userDetails: firebase.User = null;
-
-  constructor(private _firebaseAuth: AngularFireAuth, private router: Router) { 
+  constructor(private afAuth: AngularFireAuth, private af: AngularFireModule) {
+    this.user = afAuth.authState;
   }
 
-  ngOnInit(){
-    this.user = this._firebaseAuth.authState;
-    this.user.subscribe(
-      (user) => {
-        if (user) {
-          this.userDetails = user;
-          console.log(this.user);
-          console.log(this.userDetails);
+  //more about hd here: https://firebase.google.com/docs/auth/web/google-signin
+  
+  login() {
+    var deleteUa = false;
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()
+    .setCustomParameters({
+      'hd' :'bison.howard.edu'
+     })).then(function(result){
+        console.log(result);
+        if (result.user.email.endsWith("howard.edu")) {
+            console.log("inside result check");
         } else {
-          this.userDetails = null;
-          console.log(this.user);
-        }
-      }
-    );
-  }
+          console.log("failed reulult check");
+          //delete function
+          var user = firebase.auth().currentUser;
+          user.delete().then(function() {
+            // User deleted.
+            console.log("This is a Bison Privelege Bruh");
+          }).catch(function(error) {
+            // An error happened.
+            console.log("Cannot delte the user reason is: "+ error);
+          });
+          
+        }    
+     })
 
-  signInWithGoogle() {
-    return this._firebaseAuth.auth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()
-    )
   }
-
-  isLoggedIn() {
-    if (this.userDetails == null ) {
-        console.log("False ayo");
-        return false;
-      } else {
-        console.log("true");
-        return true;
-      }
-    }
 
   logout() {
-      this._firebaseAuth.auth.signOut()
-      .then((res) => this.router.navigate(['/']));
-    }
+     this.afAuth.auth.signOut();
+  }
+
+  //custom functions
+  isLoggedIn(){
+    return this.afAuth.authState;
+  }
+
+  // derieved from: https://firebase.google.com/docs/auth/web/manage-users
+  deleteUser(){
+    var user = firebase.auth().currentUser;
+    user.delete().then(function() {
+      // User deleted.
+      console.log("This is a Bison Privelege Bruh");
+    }).catch(function(error) {
+      // An error happened.
+      console.log("Cannot delte the user reason is: "+ error);
+    });
+  }
+
   }
