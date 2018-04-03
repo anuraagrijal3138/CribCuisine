@@ -13,24 +13,18 @@ export class HomepageComponent {
     private router: Router) { }
 
   signInWithGoogle() {
-    //console.log(this.authService.isLoggedIn);
-    if (this.authService.isLoggedIn()) {
-      this.router.navigateByUrl('/cuisines');
-    }
-    else {
-       this.authService.login();
-      // this.authService.user.subscribe(result => {
-      //   if (result != null) {
-      //     this.router.navigateByUrl('/cuisines');
-      //   }
-      //   else {
-      //     this.router.navigateByUrl('/home');
-      //   }
-      // }
-      // );
-    }
-
+    this.authService.googleLogin()
+    .then((response)=>{
+      console.log("Utsab dai we want your new album");
+      console.log(typeof(response))
+      if(response){
+        this.router.navigateByUrl("/cuisines")
+      }
+      else{
+        this.authService.delete;
+      }
+    })
+      .catch((error)=>this.router.initialNavigation );
   }
-
-
 }
+  

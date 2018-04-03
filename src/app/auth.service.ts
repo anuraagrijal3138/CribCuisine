@@ -4,71 +4,166 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireModule} from 'angularfire2';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { throws } from 'assert';
+
 
 @Injectable()
 export class AuthService {
-  //code copied straight from : https://github.com/angular/angularfire2/blob/master/docs/version-4-upgrade.md
-  user: Observable<firebase.User>;
-  email : String;
-  deleteU : boolean = false;
 
-  constructor(private afAuth: AngularFireAuth, private af: AngularFireModule) {
-    //this.user = afAuth.authState;
+  //copied from: https://angularfirebase.com/snippets/angularfire2-version-4-authentication-service/
+  authState: any = null;
+
+  constructor(private afAuth: AngularFireAuth,
+              private db: AngularFireDatabase,
+              private router:Router) {
+
+            this.afAuth.authState.subscribe((auth) => {
+              this.authState = auth
+              console.log("this is the authstate")
+              console.log(auth)
+            });
+          }
+
+  // Returns true if user is logged in
+  get authenticated(): boolean {
+    return this.authState !== null;
   }
 
-  //more about hd here: https://firebase.google.com/docs/auth/web/google-signin
-  
-  login() {
-    var deleteUa = false;
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()
-    .setCustomParameters({
-      'hd' :'bison.howard.edu'
-     })).then(function(result){
-        console.log(result);
-        if (result.user.email.endsWith("howard.edu")) {
-            console.log("inside result check");
+  // Returns current user data
+  get currentUser(): any {
+    return this.authenticated ? this.authState : null;
+  }
+
+  // Returns
+  get currentUserObservable(): any {
+    return this.afAuth.authState
+  }
+
+  // Returns current user UID
+  get currentUserId(): string {
+    return this.authenticated ? this.authState.uid : '';
+  }
+
+  // Anonymous User
+  get currentUserAnonymous(): boolean {
+    return this.authenticated ? this.authState.isAnonymous : false
+  }
+
+  // Returns current user display name or Guest
+  get currentUserDisplayName(): string {
+    if (!this.authState) { return 'Guest' }
+    else if (this.currentUserAnonymous) { return 'Anonymous' }
+    else { return this.authState['displayName'] || 'User without a Name' }
+  }
+
+  //// Social Auth ////
+  githubLogin() {
+    const provider = new firebase.auth.GithubAuthProvider()
+    return this.socialSignIn(provider);
+  }
+
+  googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    return this.socialSignIn(provider);
+  }
+
+  facebookLogin() {
+    const provider = new firebase.auth.FacebookAuthProvider()
+    return this.socialSignIn(provider);
+  }
+
+  twitterLogin(){
+    const provider = new firebase.auth.TwitterAuthProvider()
+    return this.socialSignIn(provider);
+  }
+  userEmail: String = "";
+
+  private socialSignIn(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((credential) =>  {
+        this.userEmail = credential.user.email;
+        console.log(credential)
+        if (this.userEmail.endsWith("howard.edu")){
+          console.log("inside authstate change")
+          this.authState = credential.user
+          this.updateUserData()
         } else {
-          console.log("failed reulult check");
-          //delete function
-          var user = firebase.auth().currentUser;
-          user.delete().then(function() {
-            // User deleted.
-            console.log("This is a Bison Privelege Bruh");
-          }).catch(function(error) {
-            // An error happened.
-            console.log("Cannot delte the user reason is: "+ error);
-          });
+          console.log("throw erro garney thau");
+          throw "email validation error!";
+        }
           
-        }    
-     })
-
+      })
+      .catch(error => console.log(error));
   }
 
-  logout() {
-     this.afAuth.auth.signOut();
+
+  //// Anonymous Auth ////
+  anonymousLogin() {
+    return this.afAuth.auth.signInAnonymously()
+    .then((user) => {
+      this.authState = user
+      this.updateUserData()
+    })
+    .catch(error => console.log(error));
   }
 
-  //custom functions
-  isLoggedIn(){
+  //// Email/Password Auth ////
+  emailSignUp(email:string, password:string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user
+        this.updateUserData()
+      })
+      .catch(error => console.log(error));
+  }
+
+  emailLogin(email:string, password:string) {
+     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+       .then((user) => {
+         this.authState = user
+         this.updateUserData()
+       })
+       .catch(error => console.log(error));
+  }
+
+  // Sends email allowing user to reset password
+  resetPassword(email: string) {
+    var auth = firebase.auth();
+
+    return auth.sendPasswordResetEmail(email)
+      .then(() => console.log("email sent"))
+      .catch((error) => console.log(error))
+  }
+
+
+  //// Sign Out ////
+  logout(): void {
+    this.afAuth.auth.signOut();
+    this.router.navigate(['/'])
+  }
+
+  //// Delete ////
+  delete():void{
     var user = firebase.auth().currentUser;
-    if (user != null) {
-      return true;
-    } else {
-      return false;
-    }
-     
+    user.delete().then((DelSuccess)=> console.log("sucess deletion"));
   }
 
-  // derieved from: https://firebase.google.com/docs/auth/web/manage-users
-  deleteUser(){
-    var user = firebase.auth().currentUser;
-    user.delete().then(function() {
-      // User deleted.
-      console.log("This is a Bison Privelege Bruh");
-    }).catch(function(error) {
-      // An error happened.
-      console.log("Cannot delte the user reason is: "+ error);
-    });
-  }
+  //// Helpers ////
+  private updateUserData(): void {
+  // Writes user name and email to realtime db
+  // useful if your app displays information about users or for admin features
+    let path = `users/${this.currentUserId}`; // Endpoint on firebase
+    let data = {
+                  email: this.authState.email,
+                  name: this.authState.displayName
+                }
+
+    this.db.object(path).update(data)
+    .catch(error => console.log(error));
 
   }
+
+}
+
+

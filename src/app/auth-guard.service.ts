@@ -5,19 +5,19 @@ import { Router, CanActivate } from '@angular/router';
 @Injectable()
 export class AuthGuardService  {
 
-//   constructor(private router: Router,
-//               private authService: AuthService) { }
+  constructor(private router: Router,
+              private authService: AuthService) { }
 
-//   canActivate() {
-//     if  ( this.authService.isLoggedIn() ) {
+  canActivate() {
+    if  ( this.authService.authenticated ) {
 
-//       return true;
+      return true;
 
-//     }
-//     else{
-//     this.router.navigate(['/']);
-//     return false;
-//   }
+    }
+    else{
+    this.router.navigate(['/']);
+    return false;
+  }
 
-// }
+}
 }
