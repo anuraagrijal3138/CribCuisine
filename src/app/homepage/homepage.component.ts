@@ -50,7 +50,17 @@ export class HomepageComponent {
           this.authService.singOut;
           window.alert("This is a Bison Privelege, try with howard email")
           this.router.navigateByUrl("/").then(
-            (success) => console.log("successfully rejected routing")
+            (success) => {console.log("successfully rejected routing")
+              this.authService.delete()
+                .then(
+                  (success) => {
+                    console.log("user was deleted sucessuflly")
+                    window.alert("This is a Bison Privelege, use your Howard Email")
+                  }
+                ).catch(
+                  (failure) => console.log("failed to delete current user")
+                )
+          }
           )}
       )
     }

@@ -36,7 +36,9 @@ export class AuthService {
     return this.auth.signOut;
   }
 
-  
+  delete(){
+    return this.auth.currentUser.delete();
+  }
  
 
 
