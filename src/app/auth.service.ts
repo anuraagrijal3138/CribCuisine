@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireModule} from 'angularfire2';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthService {
   deleteU : boolean = false;
 
   constructor(private afAuth: AngularFireAuth, private af: AngularFireModule) {
-    this.user = afAuth.authState;
+    //this.user = afAuth.authState;
   }
 
   //more about hd here: https://firebase.google.com/docs/auth/web/google-signin
@@ -50,7 +50,13 @@ export class AuthService {
 
   //custom functions
   isLoggedIn(){
-    return this.afAuth.authState;
+    var user = firebase.auth().currentUser;
+    if (user != null) {
+      return true;
+    } else {
+      return false;
+    }
+     
   }
 
   // derieved from: https://firebase.google.com/docs/auth/web/manage-users

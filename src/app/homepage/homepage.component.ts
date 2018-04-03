@@ -8,23 +8,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent {
-  userEmail:string = '';
-  constructor(private authService:AuthService,
-              private router:Router) {}
+  userEmail: string = '';
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   signInWithGoogle() {
     //console.log(this.authService.isLoggedIn);
-    this.authService.login();
-    this.authService.user.subscribe(result =>
-      {       
-          if(result != null){
-            this.router.navigateByUrl('/cuisines');
-          }
-          else{
-            this.router.navigateByUrl('/home');
-          }
-      }
-    );
+    if (this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/cuisines');
+    }
+    else {
+       this.authService.login();
+      // this.authService.user.subscribe(result => {
+      //   if (result != null) {
+      //     this.router.navigateByUrl('/cuisines');
+      //   }
+      //   else {
+      //     this.router.navigateByUrl('/home');
+      //   }
+      // }
+      // );
+    }
+
   }
 
 
