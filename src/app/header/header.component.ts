@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AuthGuardService } from '../auth-guard.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-header',
@@ -10,10 +12,12 @@ import { AuthGuardService } from '../auth-guard.service';
 export class HeaderComponent {
 
   constructor(private authService: AuthService,
-              private authGuard:AuthGuardService) {}
+              private authGuard:AuthGuardService,
+              private router: Router) {}
               
       logout(){
-        this.authService.logout();
+        this.authService.singOut();
+        this.router.navigateByUrl('/home');
       }
 
 }

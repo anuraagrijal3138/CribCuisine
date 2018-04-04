@@ -33,11 +33,15 @@ export class AuthService {
   }
 
   singOut(){
-    return this.auth.signOut;
+    return this.auth.signOut();
   }
 
   delete(){
-    return this.auth.currentUser.delete();
+    console.log("Bigro inside delete function");
+    if(this.auth.currentUser){
+      return this.auth.currentUser.delete();
+    }
+    return Promise.reject(new Error('there is no active user'));
   }
  
 
