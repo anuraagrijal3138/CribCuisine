@@ -32,6 +32,19 @@
             >
             <span class="help_block" *ngIf = "!intro.valid && intro.touched">Please enter a valid intro.</span>
           </div>
+
+          <div class="form-group">
+            <label for="hostingtime">Hosting Time</label>
+            <input 
+            type="text" 
+            class="form-control" 
+            required
+            name="hostingtime" 
+            ngModel
+            #hostingtime = "ngModel"
+            >
+            <span class="help_block" *ngIf = "!hostingtime.valid && hostingtime.touched">Please enter a valid time.</span>
+          </div>
       
           <div class="form-group">
             <label for="address">Image</label>

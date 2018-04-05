@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
-import {AngularFireModule} from 'angularfire2';
+import {AngularFireModule, FirebaseApp} from 'angularfire2';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -13,11 +13,12 @@ import { environment } from '../environments/environment';
 export class AuthService {
   //https://www.youtube.com/watch?v=-OKrloDzGpU
   auth: firebase.auth.Auth;
+  db: firebase.database.Database;
+
   constructor(){
     firebase.initializeApp(environment.firebase);
-    const Fauth = firebase.auth();
-    this.auth = Fauth;
-
+    this.auth = firebase.auth();
+    this.db = firebase.database();
     firebase.auth().onAuthStateChanged(firebaseUser => {
       if(firebaseUser){
         console.log(firebaseUser);
@@ -28,7 +29,7 @@ export class AuthService {
   }
 
   signInWithGoogle(){
-      const promise = this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider);
+      const promise = this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
       return promise;
   }
 

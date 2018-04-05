@@ -1,21 +1,15 @@
- import { Component, ViewChild } from '@angular/core';
-
+import { Component, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabaseModule, AngularFireObject, AngularFireList, AngularFireDatabase} from 'angularfire2/database';
+import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
+
+
 
 
 //import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-export class Cuisine {
 
-  constructor(
-    public name: string,
-    public intro: string,
-    public image: string
-  ) { }
-
-}
 
 @Component({
   selector: 'app-cuisine-form',
@@ -23,23 +17,38 @@ export class Cuisine {
   styleUrls: ['./cuisine-form.component.css']
 })
 export class CuisineFormComponent {
-	// cuisinesRef: AngularFireList<any>;
-	// cuisines: Observable<any[]>;	
 
   @ViewChild('cuisineForm') singleCuisine: NgForm;
-
-  itemsRef: AngularFireList<any>;
-  items: Observable<any[]>;
-
-	constructor( db: AngularFireDatabase) {	
-		this.itemsRef = db.list('data');
-    this.items = this.itemsRef.valueChanges();
-    console.log(this.items);
-
-  }
+	constructor(private authService: AuthService,
+              private router: Router) {    }
 
   onSubmit() { 
-    console.log(this.singleCuisine.value);
-		this.itemsRef.push(this.singleCuisine.value);
+    
+    this.writeNewPost
+        (this.authService.auth.currentUser.uid, this.singleCuisine.value.name, 
+          this.singleCuisine.value.intro, this.singleCuisine.value.image, this.singleCuisine.value.hostingtime)
+          .then((success)=>console.log("posted successfully")
+        ).catch(()=>console.log("failed to post"));
   }
+
+  writeNewPost(uid, name, intro, image, time) {
+    // A post entry.
+    var postData = {
+      name: name,
+      uid: uid,
+      intro: intro,
+      image: image,
+      hostingtime: time
+    };
+  
+    // Get a key for a new Post.
+    var newPostKey = this.authService.db.ref().child('cuisines').push().key;
+  
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/cuisines/' + newPostKey] = postData;
+    updates['/user-cuisines/' + uid + '/' + newPostKey] = postData;
+  
+    return this.authService.db.ref().update(updates);
+  } 
 }

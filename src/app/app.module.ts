@@ -24,6 +24,9 @@ import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/dat
 import { AuthService } from './auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthGuardService } from './auth-guard.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HostcuisinesComponent } from './dashboard/hostcuisines/hostcuisines.component';
+
 
 
 @NgModule({
@@ -36,7 +39,10 @@ import { AuthGuardService } from './auth-guard.service';
     PostCuisineComponent,
     HeaderComponent,
     HomepageComponent,
-    CuisineFormComponent
+    CuisineFormComponent,
+    DashboardComponent,
+    HostcuisinesComponent,
+  
   ],
   imports: [
     BrowserModule,
