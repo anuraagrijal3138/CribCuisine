@@ -1,4 +1,5 @@
-  <h1>Post Cuisine</h1>
+<app-host-header></app-host-header>
+<h1>Post Cuisine</h1>
 
 <div class="cointainer">
   <div class="row">
@@ -36,7 +37,7 @@
           <div class="form-group">
             <label for="hostingtime">Hosting Time</label>
             <input 
-            type="text" 
+            type="time" 
             class="form-control" 
             required
             name="hostingtime" 
@@ -46,6 +47,19 @@
             <span class="help_block" *ngIf = "!hostingtime.valid && hostingtime.touched">Please enter a valid time.</span>
           </div>
       
+          <div class="form-group">
+              <label for="price">Price</label>
+              <input 
+              type="number" 
+              class="form-control" 
+              required
+              name="price" 
+              ngModel
+              #price = "ngModel"
+              >
+              <span class="help_block" *ngIf = "!price.valid && price.touched">Please enter a valid amount.</span>
+            </div>
+
           <div class="form-group">
             <label for="address">Image</label>
             <input 

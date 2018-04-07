@@ -20,3 +20,19 @@
   </div>
 </div>
 
+<div class="row">
+    <div class="col-xs-12">
+      {{ cuisine.price }}
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-xs-12">
+        {{ cuisine.hostingtime }}
+      </div>
+    </div>
+
+
+<h2 *ngIf="paypalLoad">Paypal button is loading</h2>
+<div id="paypal-checkout-btn"></div>
+

@@ -26,19 +26,25 @@ export class CuisineFormComponent {
     
     this.writeNewPost
         (this.authService.auth.currentUser.uid, this.singleCuisine.value.name, 
-          this.singleCuisine.value.intro, this.singleCuisine.value.image, this.singleCuisine.value.hostingtime)
-          .then((success)=>console.log("posted successfully")
-        ).catch(()=>console.log("failed to post"));
+          this.singleCuisine.value.intro, this.singleCuisine.value.image,
+          this.singleCuisine.value.hostingtime, this.singleCuisine.value.price)
+          .then((success) => {
+            this.router.navigateByUrl('/cuisines');
+          }
+        ).catch(()=> {
+          this.router.navigateByUrl('/home');
+        });
   }
 
-  writeNewPost(uid, name, intro, image, time) {
+  writeNewPost(uid, name, intro, image, time, price) {
     // A post entry.
     var postData = {
       name: name,
       uid: uid,
       intro: intro,
       image: image,
-      hostingtime: time
+      hostingtime: time,
+      price : price
     };
   
     // Get a key for a new Post.

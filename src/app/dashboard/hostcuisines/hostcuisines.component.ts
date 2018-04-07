@@ -20,10 +20,4 @@ export class HostcuisinesComponent  {
                 this.userName = authService.auth.currentUser.displayName;
                 this.hostcuisines = cuisinesService.usercuisines;
               }
-  
-  logout(){
-    this.authService.singOut();
-  }
-
-
 }

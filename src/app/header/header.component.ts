@@ -10,14 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
   constructor(private authService: AuthService,
               private authGuard:AuthGuardService,
-              private router: Router) {}
+              private router: Router) {
+              }
               
       logout(){
         this.authService.singOut();
         this.router.navigateByUrl('/home');
       }
-
 }

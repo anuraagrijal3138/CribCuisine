@@ -26,6 +26,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthGuardService } from './auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HostcuisinesComponent } from './dashboard/hostcuisines/hostcuisines.component';
+import { HostHeaderComponent } from './host-header/host-header.component';
 
 
 
@@ -42,6 +43,7 @@ import { HostcuisinesComponent } from './dashboard/hostcuisines/hostcuisines.com
     CuisineFormComponent,
     DashboardComponent,
     HostcuisinesComponent,
+    HostHeaderComponent,
   
   ],
   imports: [

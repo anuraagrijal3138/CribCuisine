@@ -1,21 +1,4 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-      <div class="navbar-header">
-          <a routerLink="/home" class="navbar-brand">CribCuisine</a>
-      </div>
-
-      <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-              <li routerLinkActive="active"><a routerLink="/id/dashboard">My Dashboard</a></li>
-              <!-- <li routerLinkActive="active"><a routerLink="/id/postcuisine">Post New Cuisine</a></li> -->
-              <li><a
-                  class="align-right" 
-                  (click) = "logout()" href>LogOut</a></li>
-          </ul>
-      </div>      
-  </div>
-</nav>
-
+<app-host-header></app-host-header>
 <h1>
   Welcome {{ userName }}
 </h1>
