@@ -12,13 +12,14 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class AuthService {
   //https://www.youtube.com/watch?v=-OKrloDzGpU
-  auth: firebase.auth.Auth;
-  db: firebase.database.Database;
+  auth:   	firebase.auth.Auth;
+  db:		    firebase.database.Database;
 
   constructor(){
     firebase.initializeApp(environment.firebase);
     this.auth = firebase.auth();
     this.db = firebase.database();
+
     firebase.auth().onAuthStateChanged(firebaseUser => {
       if(firebaseUser){
         console.log(firebaseUser);
@@ -26,6 +27,11 @@ export class AuthService {
         console.log('not logged in');
       }
     })
+  }
+
+  getStorageRef(){
+    var storageRef = firebase.storage().ref();
+    return storageRef;
   }
 
   signInWithGoogle(){
@@ -44,8 +50,6 @@ export class AuthService {
     }
     return Promise.reject(new Error('there is no active user'));
   }
- 
-
 
 }
 

@@ -11,12 +11,9 @@ import { Observable } from 'rxjs/Observable';
 export class CuisinesComponent {
 	selectedCuisine: any;
 
-	constructor(private cuisinesService: CuisinesService){
-		// console.log("asasas");
-		// cuisinesService.getCuisines().subscribe(val => console.log(val));
-		// console.log(cuisinesService.getCuisines());
-		
-	}
+	constructor(private cuisinesService: CuisinesService){ }
+
+	
 	ngOnInit() {
 		this.cuisinesService.cuisineSelected
 			.subscribe(

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewChecked } from '@angular/core';
 
-import { CuisinesService } from '../cuisines.service';
-//import { Cuisine } from '../cuisine.model';
+import { AuthService } from '../../auth.service';
 
 declare let paypal: any;
 
@@ -10,10 +9,12 @@ declare let paypal: any;
   templateUrl: './cuisine-detail.component.html',
   styleUrls: ['./cuisine-detail.component.css']
 })
-export class CuisineDetailComponent implements AfterViewChecked {
+export class CuisineDetailComponent implements AfterViewChecked{
   @Input() cuisine;
   addScript: boolean = false;
   paypalLoad: boolean = true;
+
+  constructor(private authService : AuthService){}
 
   paypalConfig = {
     env: 'sandbox',
@@ -37,7 +38,9 @@ export class CuisineDetailComponent implements AfterViewChecked {
       })
     }
   };
- 
+
+  
+
   ngAfterViewChecked(): void {
     if (!this.addScript) {
       this.addPaypalScript().then(() => {
@@ -46,11 +49,11 @@ export class CuisineDetailComponent implements AfterViewChecked {
       })
     }
   }
-  
+
   addPaypalScript() {
     this.addScript = true;
     return new Promise((resolve, reject) => {
-      let scripttagElement = document.createElement('script');    
+      let scripttagElement = document.createElement('script');
       scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';
       scripttagElement.onload = resolve;
       document.body.appendChild(scripttagElement);

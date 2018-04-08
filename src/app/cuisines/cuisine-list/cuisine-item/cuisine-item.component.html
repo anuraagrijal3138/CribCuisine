@@ -5,14 +5,12 @@
     <div class="pull-left">
         <h4 class="list-group-item-heading">{{ cuisine.name }}</h4>
         <p class="list-group-item-text">{{ cuisine.intro }}</p>
-        <!-- <p ng-src class="list-group-item-text">{{ cuisine.image }}</p> -->
     </div>
     <span class="pull-right">
         <img 
-        [src]= "cuisine.image"
+        src = "{{cuisine.imgPostKey }}"
         alt="{{ cuisine.name }}" 
         class="img-responnsive" 
         style="max-height: 50px;">
     </span>
-    <!-- <app-cuisine-detail [cuisine]="cuisine"></app-cuisine-detail> -->
 </a>
