@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
+import {StorageService } from '../../storage.service';
 
 
 
@@ -20,7 +21,8 @@ export class CuisineFormComponent {
 
   @ViewChild('cuisineForm') singleCuisine: NgForm;
 	constructor(private authService: AuthService,
-              private router: Router) {    }
+              private router: Router,
+              private storageService: StorageService) {    }
 
   onSubmit() { 
     
