@@ -1,0 +1,14 @@
+img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 5%;
+}
+
+paypal-checkout-btn{
+    padding-left: 150px important!;
+}
+
+#textRow{
+    height: 200px;
+    width: 50%;
+}

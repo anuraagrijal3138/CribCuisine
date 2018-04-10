@@ -1,38 +1,64 @@
 <div class="row">
   <div class="col-xs-12">
-    <h1>
+    <h1 align="center">
       {{ cuisine.name }}
     </h1>
   </div>  
 </div>
 
-<div class="row">
+<div id="imageDiv">
   <div class="col-xs-12">
-    <img src="{{ cuisine.imgPostKey }}" 
+    <img src="{{ cuisine.imgPostKey }}"  border="5" 
+    width="300px" height="500px" 
     alt="{{ cuisine.name }}" class="img-responsive"
     style = "max-height: 300px;">
   </div>
 </div>
 
+<div class="textRow">
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12"><p align="center">
     {{ cuisine.intro }}
+  </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12"><p align="center">
+    Hosted by: {{ cuisine.hostName }}   rating:0
+  </p>
   </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12">
-      {{ cuisine.price }}
+      <p align="center">
+      Price: ${{ cuisine.price }}
+    </p>
     </div>
   </div>
 
   <div class="row">
       <div class="col-xs-12">
-        {{ cuisine.hostingtime }}
+        <p align="center">
+        Hosting Time: {{ cuisine.hostingtime }}
+      </p>
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-xs-12">
+        <p align="center">
+        Location: {{ cuisine.location }}
+      </p>
+      </div>
+    </div>
+    <div id="lastDiv"></div>
 
 <h2 *ngIf="paypalLoad">Paypal button is loading</h2>
-<div id="paypal-checkout-btn"></div>
+<div style="padding-left:250px;">
+  <div id="paypal-checkout-btn" ></div>
+</div>
+
+</div>
 

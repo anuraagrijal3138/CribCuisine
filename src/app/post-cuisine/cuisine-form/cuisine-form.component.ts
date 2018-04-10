@@ -50,6 +50,10 @@ export class CuisineFormComponent {
 writeNewPost(uid, name, intro, time, price) {
   // Get a key for a new Post.
   var newPostKey = this.authService.db.ref().child('cuisines').push().key;
+  var hostname = this.authService.auth.currentUser.displayName;
+  var hostImage = this.authService.auth.currentUser.photoURL;
+  var hostMetadata = this.authService.auth.currentUser.metadata;
+  //var rating = this.authService.auth.currentUser.
 
   // A post entry.
   var postData = {
@@ -58,7 +62,10 @@ writeNewPost(uid, name, intro, time, price) {
     intro: intro,
     hostingtime: time,
     price : price,
-    imgPostKey : newPostKey
+    imgPostKey : newPostKey,
+    hostName : hostname,
+    hostImage: hostImage,
+    hostMetadata: hostMetadata
     };
 
   this.newPostKey = newPostKey;

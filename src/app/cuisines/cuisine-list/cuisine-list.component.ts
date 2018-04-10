@@ -15,7 +15,7 @@ export class CuisineListComponent  {
 	
 	cuisines : Observable<any[]>;
 	constructor(cuisinesService: CuisinesService){
-
+		
 		this.cuisines = cuisinesService.cuisines;
 	}
 

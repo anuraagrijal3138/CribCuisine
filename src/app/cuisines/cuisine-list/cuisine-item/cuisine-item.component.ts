@@ -11,18 +11,12 @@ import { AuthService } from '../../../auth.service';
   styleUrls: ['./cuisine-item.component.css']
 })
 export class CuisineItemComponent implements OnInit {
-  
+  //Input pass data from parent to child component
   @Input() cuisine: any;
   
   
   constructor(private cuisinesService: CuisinesService,
               public authService: AuthService) {      }
-
-  getCuisineImage(){
-
-    
-    
-  }
 
   ngOnInit() {
     

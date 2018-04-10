@@ -14,7 +14,7 @@ export class CuisineDetailComponent implements AfterViewChecked{
   addScript: boolean = false;
   paypalLoad: boolean = true;
 
-  constructor(private authService : AuthService){}
+  constructor(private authService : AuthService){  }
 
   paypalConfig = {
     env: 'sandbox',

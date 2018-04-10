@@ -1,5 +1,11 @@
 export interface Cuisine {
-	name: string;
-	intro: string;
-	image: string;
+	name: String,
+	uid: String,
+	description: String,
+	hostingtime: String,
+	price : number,
+	imgPostKey : String,
+	hostName : String,
+	hostImage: String,
+	hostMetadata: firebase.auth.UserMetadata
 }

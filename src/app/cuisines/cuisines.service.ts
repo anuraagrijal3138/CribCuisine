@@ -2,17 +2,13 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../auth.service';
+import { Cuisine } from './cuisine.model';
 
-export interface Cuisine {
-	name: string;
-	intro: string;
-	image: string;
-}
 
 @Injectable()
 export class CuisinesService {
 
-	cuisineSelected = new EventEmitter<any>();
+	cuisineSelected = new EventEmitter<Cuisine>();
 	
 	cuisines : Observable<any[]>;	
 	usercuisines: Observable<any[]>;
