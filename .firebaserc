@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "cribcuisine"
+    "default": "cribcuisine",
+    "cribcuisine": "cribcuisine"
   }
 }
