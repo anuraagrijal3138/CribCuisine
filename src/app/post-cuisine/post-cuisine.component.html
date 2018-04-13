@@ -1,3 +1,132 @@
 
-<app-cuisine-form></app-cuisine-form>
+<!-- <app-cuisine-form></app-cuisine-form> -->
+<app-host-header></app-host-header>
+<h1>Post Cuisine</h1>
+<mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+        <mat-step>
+          <form 
+          class="form-width"
+          (ngSubmit)="onSubmit1(form1)"  #form1="ngForm">
+            <ng-template matStepLabel>Fill out your Cuisine Information</ng-template>
+            <mat-form-field class="full-width">
+                <input matInput 
+                placeholder="Cuisine Name" 
+                type="text" 
+                name="name"
+                ngModel
+                #name = "ngModel"
+                required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                    <input matInput 
+                    placeholder="Cuisine Discription" 
+                    required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <input matInput 
+                type="date"
+                placeholder="Hosting Date" 
+                    required>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                    <input matInput 
+                    type="time"
+                    placeholder="Hosting Time" 
+                        required>
+                </mat-form-field>
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <form 
+          class = "form-width"
+          (ngSubmit)="onSubmit2(form2)"  #form2="ngForm">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field>
+                    <mat-select value="Select Dorm">
+                      <mat-option value="Select Dorm">Select Dorm</mat-option>
+                      <mat-option value="Bethune Annex">Bethune Annex</mat-option>
+                      <mat-option value="College Hall North">College Hall North</mat-option>
+                      <mat-option value="College Hall South">College Hall South</mat-option>
+                      <mat-option value="Cook Hall">Cook Hall</mat-option>
+                      <mat-option value="Drew Hall">Drew Hall</mat-option>
+                      <mat-option value="Howard Plaza Towers East">Howard Plaza Towers East</mat-option>
+                      <mat-option value="Howard Plaza Towers West">Howard Plaza Towers West</mat-option>
+                      <mat-option value="Off Campus">Off Campus</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            <p>
+                    <mat-form-field class="full-width">
+                      <textarea matInput placeholder="Street address"></textarea>
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                      <textarea matInput placeholder="Street address 2"></textarea>
+                    </mat-form-field>
+                  </p>
+                
+                  <table class="full-width" cellspacing="0"><tr>
+                    <td><mat-form-field class="full-width">
+                      <input matInput placeholder="City">
+                    </mat-form-field></td>
+                    <td><mat-form-field class="full-width">
+                      <input matInput placeholder="State">
+                    </mat-form-field></td>
+                    <td><mat-form-field class="full-width">
+                      <input matInput #postalCode maxlength="5" placeholder="Postal Code">
+                      <mat-hint align="end"></mat-hint>
+                    </mat-form-field></td>
+                  </tr></table>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+        <form 
+        class = "form-width"
+        (ngSubmit)="onSubmit3(form3)"  #form3="ngForm">
+          <ng-template matStepLabel>Done</ng-template>
+          <mat-form-field>
+                <input matInput type="number" min="1" placeholder="Number">
+                <mat-hint>Number of customers you can accomodate</mat-hint>
+              </mat-form-field>
+              <hr>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button mat-icon-button type= "submit" color="warn">
+                    <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
+          </div>
+        </form>
+        </mat-step>
+      </mat-horizontal-stepper>
 
+<!-- <div class="cointainer">
+  <div class="row">
+    <div class="col-xs-12.col-md-8.col-lg-5">
+      <div>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-6">
+                        <form class="example-form">
+                            <mat-form-field class="example-full-width">
+                                <input matInput 
+                                placeholder="Cuisine Name" 
+                                required>
+                            </mat-form-field>
+                        </form>
+                  </div>
+                  <div class="col-md-6">
+
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+ -->
