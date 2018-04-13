@@ -53,6 +53,7 @@ import { HostHeaderComponent } from './host-header/host-header.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     Material,

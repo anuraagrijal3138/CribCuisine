@@ -1,20 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
-interface Foo {
-    name:string,
-    discription: string
-    hostingDate:string
-    hostingTime: string
-    dormName: string
-    streetAddress1: string
-    streetAddress2: string
-    city: string
-    state: string
-    postalCode: number
-    totalCustomers: number
-}
 
 @Component({
   selector: 'app-post-cuisine',
@@ -22,21 +10,40 @@ interface Foo {
   styleUrls: ['./post-cuisine.component.css'],
   providers: [AngularFireAuth]
 })
-export class PostCuisineComponent {
-  let cuisineInfo = {} as Foo;
-  constructor() {}
-  onSubmit1(a) {
-      // this.cuisineInfo.name = a.value.name;
-      console.log(a.value.name);
-      this.cuisineInfo.name = ;
-      console.log(this.cuisineInfo);
+export class PostCuisineComponent implements OnInit{
+  formGroup: FormGroup;
+
+  /** Returns a FormArray with the name 'formArray'. */
+  get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
+
+  constructor(private _formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.formGroup = this._formBuilder.group({
+      formArray: this._formBuilder.array([
+        this._formBuilder.group({
+          cuisineName: ['', Validators.required],
+          discription: ['', Validators.required],
+          hostingDate: ['', Validators.required],
+          hostingTime: ['', Validators.required],
+          imageUrl: ['', Validators.required] 
+        }),
+        this._formBuilder.group({
+          dormName: ['', Validators.required],
+          streetAddress1: ['', Validators.required],
+          streetAddress2: ['', Validators.required],
+          cityName: ['', Validators.required],
+          stateName: ['', Validators.required],
+          postalCode: ['', Validators.required]
+        }),
+        this._formBuilder.group({
+          numberCust: ['', [Validators.required, Validators.min(1)]]
+        }),
+      ])
+    });
+
   }
-  onSubmit2(a) {
-    console.log("from post cuisine component 2");
-    
-}
-onSubmit3(a) {
-  console.log("from post cuisine component 3");
-  
-}
+  onSubmit() {
+    console.log(this.formGroup.value.formArray);
+  }
 }

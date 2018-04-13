@@ -2,16 +2,138 @@
 <!-- <app-cuisine-form></app-cuisine-form> -->
 <app-host-header></app-host-header>
 <h1>Post Cuisine</h1>
-<mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
-        <mat-step>
-          <form 
-          class="form-width"
-          (ngSubmit)="onSubmit1(form1)"  #form1="ngForm">
+
+
+
+<form [formGroup]="formGroup"
+(ngSubmit)="onSubmit()">
+  <mat-vertical-stepper #linearVerticalStepper="matVerticalStepper" formArrayName="formArray" linear>
+    <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+      <ng-template matStepLabel>Fill out cuisine info</ng-template>
+      <mat-form-field 
+      class="full-width"> 
+        <mat-label>Cuisine Name</mat-label>
+        <input matInput 
+        formControlName="cuisineName">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+      class="full-width">
+        <mat-label>Discription</mat-label>
+        <input matInput formControlName="discription">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+      class="full-width">
+        <mat-label>Hosting Date</mat-label>
+        <input matInput formControlName="hostingDate">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+      class="full-width">
+        <mat-label>Hosting Time</mat-label>
+        <input matInput formControlName="hostingTime">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+      class="full-width">
+      <!-- <div class="form-group">
+          <label for="price">Image</label>
+          <input class="form-control" type="file" #file (change)="onChange(file.files)"  />
+      </div> -->
+        <mat-label>Image</mat-label>
+        <input matInput formControlName="imageUrl">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
+      <ng-template matStepLabel>
+        <div>Fill out your address</div>
+      </ng-template>
+      <mat-form-field>
+          <mat-label>Dorm name/ Off-Campus</mat-label>
+          <mat-select matInput formControlName="dormName">
+            <mat-option value="Bethune Annex">Bethune Annex</mat-option>
+            <mat-option value="College Hall North">College Hall North</mat-option>
+            <mat-option value="College Hall South">College Hall South</mat-option>
+            <mat-option value="Cook Hall">Cook Hall</mat-option>
+            <mat-option value="Drew Hall">Drew Hall</mat-option>
+            <mat-option value="Howard Plaza Towers East">Howard Plaza Towers East</mat-option>
+            <mat-option value="Howard Plaza Towers West">Howard Plaza Towers West</mat-option>
+            <mat-option value="Off Campus">Off Campus</mat-option>
+          </mat-select>
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+  <p>
+          <mat-form-field class="full-width">
+              <mat-label>Street address 1</mat-label>
+            <textarea matInput formControlName="streetAddress1"></textarea>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+              <mat-label>Street address 2</mat-label>
+            <textarea matInput formControlName="streetAddress2"></textarea>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+        </p>
+      
+        <table cellspacing="0"><tr>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>City</mat-label>
+            <input matInput formControlName="cityName">
+          </mat-form-field></td>
+          <td><mat-form-field class="full-width">
+              <mat-label>State</mat-label>
+            <input matInput formControlName="stateName">
+          </mat-form-field></td>
+          <td><mat-form-field class="full-width">
+              <mat-label>Postal Code</mat-label>
+            <input matInput formControlName="postalCode" #postalCode maxlength="5">
+            <mat-hint align="end"></mat-hint>
+          </mat-form-field></td>
+        </tr></table>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+
+    <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
+      <ng-template matStepLabel>Number of Accomodations</ng-template>
+      <mat-form-field>
+          <mat-label>Number of customers</mat-label>
+          <input matInput formControlName="numberCust" min="1">
+        </mat-form-field>
+      <div>
+        <button mat-button>Done</button>
+        <button type="button" mat-button (click)="linearVerticalStepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</form>
+
+
+
+    <!-- <mat-horizontal-stepper #stepper="matHorizontalStepper" linear>
+        <mat-step [stepControl]="firstFormGroup">
+                <form 
+                [formGroup]="firstFormGroup"
+                class="form-width"
+                (ngSubmit)="onSubmit1(form1)"  #form1="ngForm">
             <ng-template matStepLabel>Fill out your Cuisine Information</ng-template>
             <mat-form-field class="full-width">
-                <input matInput 
-                placeholder="Cuisine Name" 
-                type="text" 
+                <input matInput
+                placeholder="Cuisine Name"
+                type="text"
                 name="name"
                 ngModel
                 #name = "ngModel"
@@ -37,12 +159,12 @@
             <div>
               <button mat-button matStepperNext>Next</button>
             </div>
-          </form>
+            </form>
         </mat-step>
         <mat-step>
-          <form 
-          class = "form-width"
-          (ngSubmit)="onSubmit2(form2)"  #form2="ngForm">
+                <form 
+                class="form-width"
+                (ngSubmit)="onSubmit1(form1)"  #form1="ngForm">
             <ng-template matStepLabel>Fill out your address</ng-template>
             <mat-form-field>
                     <mat-select value="Select Dorm">
@@ -79,15 +201,15 @@
                     </mat-form-field></td>
                   </tr></table>
             <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
             </div>
-          </form>
+            </form>
         </mat-step>
         <mat-step>
-        <form 
-        class = "form-width"
-        (ngSubmit)="onSubmit3(form3)"  #form3="ngForm">
+                <form 
+                class="form-width"
+                (ngSubmit)="onSubmit1(form1)"  #form1="ngForm">
           <ng-template matStepLabel>Done</ng-template>
           <mat-form-field>
                 <input matInput type="number" min="1" placeholder="Number">
@@ -101,9 +223,9 @@
                     <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
             </button>
           </div>
-        </form>
+          </form>
         </mat-step>
-      </mat-horizontal-stepper>
+      </mat-horizontal-stepper> -->
 
 <!-- <div class="cointainer">
   <div class="row">
