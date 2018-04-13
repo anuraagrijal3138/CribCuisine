@@ -26,15 +26,15 @@ export class PostCuisineComponent implements OnInit{
           discription: ['', Validators.required],
           hostingDate: ['', Validators.required],
           hostingTime: ['', Validators.required],
-          imageUrl: ['', Validators.required] 
+          imageUrl: ['', Validators.required],
+          price: ['', Validators.required] 
         }),
         this._formBuilder.group({
           dormName: ['', Validators.required],
           streetAddress1: ['', Validators.required],
           streetAddress2: ['', Validators.required],
           cityName: ['', Validators.required],
-          stateName: ['', Validators.required],
-          postalCode: ['', Validators.required]
+          stateName: ['', Validators.required]
         }),
         this._formBuilder.group({
           numberCust: ['', [Validators.required, Validators.min(1)]]

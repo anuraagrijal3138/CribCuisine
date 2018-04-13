@@ -28,14 +28,14 @@
       <mat-form-field
       class="full-width">
         <mat-label>Hosting Date</mat-label>
-        <input matInput formControlName="hostingDate">
+        <input matInput type="date" formControlName="hostingDate">
         <mat-error>This field is required</mat-error>
       </mat-form-field>
 
       <mat-form-field
       class="full-width">
         <mat-label>Hosting Time</mat-label>
-        <input matInput formControlName="hostingTime">
+        <input matInput type="time" formControlName="hostingTime">
         <mat-error>This field is required</mat-error>
       </mat-form-field>
 
@@ -47,6 +47,13 @@
       </div> -->
         <mat-label>Image</mat-label>
         <input matInput formControlName="imageUrl">
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+      class="full-width">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price">
         <mat-error>This field is required</mat-error>
       </mat-form-field>
       <div>
@@ -94,11 +101,6 @@
           <td><mat-form-field class="full-width">
               <mat-label>State</mat-label>
             <input matInput formControlName="stateName">
-          </mat-form-field></td>
-          <td><mat-form-field class="full-width">
-              <mat-label>Postal Code</mat-label>
-            <input matInput formControlName="postalCode" #postalCode maxlength="5">
-            <mat-hint align="end"></mat-hint>
           </mat-form-field></td>
         </tr></table>
       <div>
