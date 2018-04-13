@@ -50,7 +50,7 @@
         <mat-error>This field is required</mat-error>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext type="button">Next</button>
       </div>
     </mat-step>
 
@@ -102,8 +102,8 @@
           </mat-form-field></td>
         </tr></table>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
       </div>
     </mat-step>
 
@@ -114,8 +114,10 @@
           <input matInput formControlName="numberCust" min="1">
         </mat-form-field>
       <div>
-        <button mat-button>Done</button>
-        <button type="button" mat-button (click)="linearVerticalStepper.reset()">Reset</button>
+          <button type="button" mat-button (click)="linearVerticalStepper.reset()">Reset</button>
+          <button mat-fab>
+              <mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+            </button>
       </div>
     </mat-step>
   </mat-vertical-stepper>
