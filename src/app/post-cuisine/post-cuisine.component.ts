@@ -14,6 +14,7 @@ import { AuthService } from '../auth.service';
 })
 export class PostCuisineComponent implements OnInit{
   formGroup: FormGroup;
+  files: FileList;
 
   /** Returns a FormArray with the name 'formArray'. */
   get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
@@ -45,6 +46,10 @@ export class PostCuisineComponent implements OnInit{
       ])
     });
 
+  }
+  onChange(event){
+    console.log(event);
+    this.files = event;
   }
   onSubmit() {
     console.log(this.formGroup.value.formArray);
@@ -121,15 +126,15 @@ writeNewPost(uid, cuisineName, description, hostingDate, hostingTime, dormName,
   var cref = rootref.child('/cuisines/' + newPostKey);
   var uref = rootref.child('/user-cuisines/'+uid+'/'+ newPostKey);
 
-  //var file = this.files.item(0);
+  var file = this.files.item(0);
 
-  // cref.put(file).then(function(snapshot) {
-  //   console.log('Uploaded a blob or file!');
-  //   });
+  cref.put(file).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+    });
 
-  // uref.put(file).then(function(snapshot) {
-  //   console.log('Uploaded a blob or file!');
-  //   });
+  uref.put(file).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+    });
   
   return this.authService.db.ref().update(updates);
 

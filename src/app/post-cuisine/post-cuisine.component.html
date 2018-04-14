@@ -49,7 +49,10 @@
         <input matInput formControlName="imageUrl">
         <mat-error>This field is required</mat-error>
       </mat-form-field>
-
+      <div class="form-group">
+          <label for="price">Image</label>
+          <input class="form-control" type="file" #file (change)="onChange(file.files)"  />
+      </div>
       <mat-form-field
       class="full-width">
         <mat-label>Price</mat-label>
