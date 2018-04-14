@@ -59,12 +59,11 @@ export class PostCuisineComponent implements OnInit{
     var streetAddress2 = this.formGroup.value.formArray[1].streetAddress2;
     var cityName = this.formGroup.value.formArray[1].cityName;
     var stateName = this.formGroup.value.formArray[1].stateName;
-    var postalCode = this.formGroup.value.formArray[1].postalCode;
     var numberCust = this.formGroup.value.formArray[2].numberCust;
 
     this.writeNewPost
     (this.authService.auth.currentUser.uid, cuisineName, description, hostingDate, hostingTime, dormName,
-       streetAddress1, streetAddress2, cityName, stateName, postalCode, numberCust)
+       streetAddress1, streetAddress2, cityName, stateName, numberCust)
       .then((success) => {
         // this.uploadToStorage(this.uid,this.newPostKey).then((success)=>console.log(success))
           // .catch((error)=>console.log(error));
@@ -80,7 +79,7 @@ export class PostCuisineComponent implements OnInit{
 
 
 writeNewPost(uid, cuisineName, description, hostingDate, hostingTime, dormName,
-       streetAddress1, streetAddress2, cityName, stateName, postalCode, numberCust){
+       streetAddress1, streetAddress2, cityName, stateName, numberCust){
   // Get a key for a new Post.
   var newPostKey = this.authService.db.ref().child('cuisines').push().key;
   var hostname = this.authService.auth.currentUser.displayName;
@@ -100,7 +99,6 @@ writeNewPost(uid, cuisineName, description, hostingDate, hostingTime, dormName,
     streetAddress2: streetAddress2,
     cityName: cityName,
     stateName: stateName,
-    postalCode: postalCode,
     numberCust: numberCust,
     imgPostKey : newPostKey,
     hostName : hostname,
