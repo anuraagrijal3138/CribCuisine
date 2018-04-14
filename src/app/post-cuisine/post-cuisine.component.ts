@@ -29,7 +29,6 @@ export class PostCuisineComponent implements OnInit{
           description: ['', Validators.required],
           hostingDate: ['', Validators.required],
           hostingTime: ['', Validators.required],
-          imageUrl: ['', Validators.required],
           price: ['', Validators.required] 
         }),
         this._formBuilder.group({
@@ -53,7 +52,7 @@ export class PostCuisineComponent implements OnInit{
     var cuisineName = this.formGroup.value.formArray[0].cuisineName;
     var description = this.formGroup.value.formArray[0].description;
     var hostingDate = this.formGroup.value.formArray[0].hostingDate;
-    var hostingTime = this.formGroup.value.formArray[0].imageUrl;
+    var hostingTime = this.formGroup.value.formArray[0].hostingTime;
     var dormName =    this.formGroup.value.formArray[1].dormName;
     var streetAddress1 = this.formGroup.value.formArray[1].streetAddress1;
     var streetAddress2 = this.formGroup.value.formArray[1].streetAddress2;
