@@ -16,30 +16,20 @@ export class CuisineItemComponent implements OnInit {
   
   
   constructor(private cuisinesService: CuisinesService,
-              public authService: AuthService) {      }
+              public authService: AuthService) {  
+
+
+                  }
 
   ngOnInit() {
     
-    var storageRef = this.authService.getStorageRef();
-
-    console.log("This is type of cuisines");
-    console.log(this.cuisine);
-
-    storageRef.child('cuisines/'+this.cuisine.imgPostKey+'/').getDownloadURL()
-      .then((url) => {
-        this.cuisine.imgPostKey = url;
-    }).catch(function(error) {
-      // Handle any errors
-      console.log(error)
-    });
-    
-    console.log(this.cuisine);
+        console.log(this.cuisine);
   }
 
   onSelected() {
-    console.log("onselected:")
-    console.log(this.cuisine);
     this.cuisinesService.cuisineSelected.emit(this.cuisine);
+    console.log("onselected:")
+    console.log(this.cuisine);  
   }
 
 }
