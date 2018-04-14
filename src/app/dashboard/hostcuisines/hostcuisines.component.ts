@@ -12,12 +12,23 @@ import { CuisinesService } from '../../cuisines/cuisines.service';
 export class HostcuisinesComponent  {
 
   userName: String;
+  hostSelectedCuisine: any;
 
   hostcuisines : Observable<any[]>;
+
   constructor(private authService: AuthService,
               private cuisinesService: CuisinesService,
               private router: Router) {
                 this.userName = authService.auth.currentUser.displayName;
                 this.hostcuisines = cuisinesService.usercuisines;
+              }
+
+              ngOnInit() {
+                this.cuisinesService.hostCuisineSelected
+                  .subscribe(
+                    (cuisine : any) => {
+                      this.hostSelectedCuisine = cuisine;
+                    }
+                  );
               }
 }

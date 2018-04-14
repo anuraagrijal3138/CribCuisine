@@ -9,6 +9,7 @@ import { Cuisine } from './cuisine.model';
 export class CuisinesService {
 
 	cuisineSelected = new EventEmitter<Cuisine>();
+	hostCuisineSelected = new EventEmitter<Cuisine>();
 	
 	cuisines : Observable<any[]>;	
 	usercuisines: Observable<any[]>;
