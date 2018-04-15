@@ -54,12 +54,32 @@ export class PostCuisineComponent implements OnInit{
 
   onSubmit() {
     console.log(this.formGroup.value.formArray);
+    var time = this.formGroup.value.formArray[0].hostingTime;
+    time = time.split(':');
+    var hours = Number(time[0]);
+    var minutes = Number(time[1]);
+    var timeValue;
+
+    if (hours > 0 && hours <= 12)
+    {
+      timeValue= "" + hours;
+    } else if (hours > 12)
+    {
+      timeValue= "" + (hours - 12);
+    }
+    else if (hours == 0)
+    {
+      timeValue= "12";
+    }
     
+    timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;  // get minutes
+    timeValue += (hours >= 12) ? " P.M." : " A.M.";  // get AM/PM
+
     console.log(this.formGroup.value.formArray[0]);
     var cuisineName = this.formGroup.value.formArray[0].cuisineName;
     var description = this.formGroup.value.formArray[0].description;
     var hostingDate = this.formGroup.value.formArray[0].hostingDate;
-    var hostingTime = this.formGroup.value.formArray[0].hostingTime;
+    var hostingTime = timeValue;
     var dormName =    this.formGroup.value.formArray[1].dormName;
     var streetAddress1 = this.formGroup.value.formArray[1].streetAddress1;
     var streetAddress2 = this.formGroup.value.formArray[1].streetAddress2;
