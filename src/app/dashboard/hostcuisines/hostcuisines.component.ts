@@ -23,12 +23,12 @@ export class HostcuisinesComponent  {
                 this.hostcuisines = cuisinesService.usercuisines;
               }
 
-              ngOnInit() {
-                this.cuisinesService.hostCuisineSelected
-                  .subscribe(
-                    (cuisine : any) => {
-                      this.hostSelectedCuisine = cuisine;
-                    }
-                  );
-              }
+  ngOnInit() {
+    this.cuisinesService.hostCuisineSelected
+      .subscribe(
+        (cuisine : any) => {
+          this.hostSelectedCuisine = cuisine;
+        }
+      );
+  }
 }

@@ -30,6 +30,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HostcuisinesComponent } from './dashboard/hostcuisines/hostcuisines.component';
 import { HostHeaderComponent } from './host-header/host-header.component';
+import { HostcuisinedetailsComponent } from './dashboard/hostcuisines/hostcuisinedetails/hostcuisinedetails.component';
 
 
 
@@ -47,6 +48,7 @@ import { HostHeaderComponent } from './host-header/host-header.component';
     DashboardComponent,
     HostcuisinesComponent,
     HostHeaderComponent,
+    HostcuisinedetailsComponent,
   
   ],
   imports: [

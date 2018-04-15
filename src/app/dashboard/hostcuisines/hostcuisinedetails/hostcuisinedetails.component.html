@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-xs-12">
+      <h1 align="center">
+        {{ cuisine.cuisineName }}
+      </h1>
+    </div>  
+  </div>
+  
+  <div id="imageDiv">
+    <div class="col-xs-12">
+      <img src="{{ cuisine.imgUrl }}"  border="5" 
+      width="300px" height="500px" 
+      alt="{{ cuisine.name }}" class="img-responsive"
+      style = "max-height: 300px;">
+    </div>
+  </div>
+  
+  <div class="textRow">
+  <div class="row">
+    <div class="col-xs-12"><p align="center">
+      {{ cuisine.description }}
+    </p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12"><p align="center">
+      Hosted by: {{ cuisine.hostName }}   rating:0
+    </p>
+    </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-xs-12">
+        <p align="center">
+        Price: ${{ cuisine.price }}
+      </p>
+      </div>
+    </div>
+  
+    <div class="row">
+        <div class="col-xs-12">
+          <p align="center">
+          Hosting Date: {{ cuisine.hostingDate }}
+        </p>
+        </div>
+      </div>
+  
+    <div class="row">
+        <div class="col-xs-12">
+          <p align="center">
+          Hosting Time: {{ cuisine.hostingTime }}
+        </p>
+        </div>
+      </div>
+  
+      <div class="row">
+          <div class="col-xs-12">
+            <p align="center">
+            number of Guests: {{ cuisine.numberCust }}
+          </p>
+          </div>
+        </div>
+  
+      <div class="row">
+        <div class="col-xs-12">
+          <p align="center">
+          Location: {{ cuisine.dormName }}
+        </p>
+        </div>
+      </div>
+      <div id="lastDiv"></div>
+      <div class="row">
+          <button type="button" (click)="deleteListing(cuisine)">Delete listing</button>
+        </div>
+  
+  </div>

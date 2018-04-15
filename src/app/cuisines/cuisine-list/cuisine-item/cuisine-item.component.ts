@@ -29,7 +29,7 @@ export class CuisineItemComponent implements OnInit {
   onSelected() {
     this.cuisinesService.cuisineSelected.emit(this.cuisine);
     this.cuisinesService.hostCuisineSelected.emit(this.cuisine);
-    console.log("onselected:")
+    console.log("onselected: of cuisine item")
     console.log(this.cuisine);  
   }
 

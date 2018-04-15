@@ -14,10 +14,11 @@
            [cuisine] = "cuisineEl"></app-cuisine-item>
     </div>
     <div class="col-md-7">
-        <app-cuisine-detail
+        <app-hostcuisinedetails
         *ngIf = "hostSelectedCuisine;else infoText"
-        [cuisine] = "hostSelectedCuisine"></app-cuisine-detail>
+        [cuisine] = "hostSelectedCuisine"></app-hostcuisinedetails>
         <ng-template #infoText>
         </ng-template>
       </div>
 </div>
+
