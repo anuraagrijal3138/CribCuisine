@@ -3,7 +3,12 @@
   Welcome {{ userName }}
 </h1>
 <mat-tab-group>
-    <mat-tab label="Hosted Cuisines">Hosted cuisines</mat-tab>
+    <mat-tab label="Hosted Cuisines">
+      <p>
+        These are the cuisines you posted!
+      </p>
+      <app-hostcuisines></app-hostcuisines>
+    </mat-tab>
     <mat-tab label="Booked Cuisines">Content 2</mat-tab>
     <mat-tab label="Notifications">Content 2</mat-tab>
   </mat-tab-group>
