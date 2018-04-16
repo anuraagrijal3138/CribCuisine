@@ -1,14 +1,13 @@
 <a 
   (click) = "onSelected()"   
   class="list-group-item clearfix">
-  <!-- <h4 class="list-group-item-heading">"all"</h4> -->
     <div class="pull-left">
-        <h4 class="list-group-item-heading">{{ cuisine.name }}</h4>
-        <p class="list-group-item-text">{{ cuisine.intro }}</p>
+        <h4 class="list-group-item-heading">{{ cuisine.cuisineName }}</h4>
+        <p class="list-group-item-text">{{ cuisine.description }}</p>
     </div>
     <span class="pull-right">
         <img 
-        src = "{{cuisine.imgPostKey }}"
+        src = "{{cuisine.imgUrl }}"
         alt="{{ cuisine.name }}" 
         class="img-responnsive" 
         style="max-height: 50px;">

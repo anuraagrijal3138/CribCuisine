@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-xs-12">
     <h1 align="center">
-      {{ cuisine.name }}
+      {{ cuisine.cuisineName }}
     </h1>
   </div>  
 </div>
 
 <div id="imageDiv">
   <div class="col-xs-12">
-    <img src="{{ cuisine.imgPostKey }}"  border="5" 
+    <img src="{{ cuisine.imgUrl }}"  border="5" 
     width="300px" height="500px" 
     alt="{{ cuisine.name }}" class="img-responsive"
     style = "max-height: 300px;">
@@ -18,7 +18,7 @@
 <div class="textRow">
 <div class="row">
   <div class="col-xs-12"><p align="center">
-    {{ cuisine.intro }}
+    {{ cuisine.description }}
   </p>
   </div>
 </div>
@@ -41,15 +41,31 @@
   <div class="row">
       <div class="col-xs-12">
         <p align="center">
-        Hosting Time: {{ cuisine.hostingtime }}
+        Hosting Date: {{ cuisine.hostingDate }}
+      </p>
+      </div>
+    </div>
+
+  <div class="row">
+      <div class="col-xs-12">
+        <p align="center">
+        Hosting Time: {{ cuisine.hostingTime }}
       </p>
       </div>
     </div>
 
     <div class="row">
+        <div class="col-xs-12">
+          <p align="center">
+          number of Guests: {{ cuisine.numberCust }}
+        </p>
+        </div>
+      </div>
+
+    <div class="row">
       <div class="col-xs-12">
         <p align="center">
-        Location: {{ cuisine.location }}
+        Location: {{ cuisine.dormName }}
       </p>
       </div>
     </div>

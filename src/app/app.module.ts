@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+
 
 //load the environment file that we edited
 import { environment } from '../environments/environment';
@@ -16,7 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CuisineFormComponent } from './post-cuisine/cuisine-form/cuisine-form.component';
-
+import { Material } from './material.module';
 //database handle
 import { AngularFireModule } from 'angularfire2';
 import { CuisinesService } from './cuisines/cuisines.service';
@@ -27,6 +30,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HostcuisinesComponent } from './dashboard/hostcuisines/hostcuisines.component';
 import { HostHeaderComponent } from './host-header/host-header.component';
+import { HostcuisinedetailsComponent } from './dashboard/hostcuisines/hostcuisinedetails/hostcuisinedetails.component';
 
 
 
@@ -44,12 +48,18 @@ import { HostHeaderComponent } from './host-header/host-header.component';
     DashboardComponent,
     HostcuisinesComponent,
     HostHeaderComponent,
+    HostcuisinedetailsComponent,
   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-		FormsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    Material,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [CuisinesService, AuthGuardService, AngularFireDatabase, AngularFireDatabaseModule,

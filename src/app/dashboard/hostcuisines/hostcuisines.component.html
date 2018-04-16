@@ -13,4 +13,12 @@
            *ngFor="let cuisineEl of (hostcuisines | async)"
            [cuisine] = "cuisineEl"></app-cuisine-item>
     </div>
+    <div class="col-md-7">
+        <app-hostcuisinedetails
+        *ngIf = "hostSelectedCuisine;else infoText"
+        [cuisine] = "hostSelectedCuisine"></app-hostcuisinedetails>
+        <ng-template #infoText>
+        </ng-template>
+      </div>
 </div>
+
