@@ -43,9 +43,9 @@ export class CuisineDetailComponent implements AfterViewChecked{
       var timeDifference = hostTime - new Date().getTime();
       console.log(timeDifference);
 
-      if (timeDifference < 0){
-        return null;
-      }
+      // if (timeDifference < 0){
+      //   return null;
+      // }
 
       
       return actions.payment.create({
