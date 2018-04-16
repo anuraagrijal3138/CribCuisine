@@ -91,6 +91,7 @@ function sendWelcomeEmail(email, displayName) {
   });
 }
     
+
 // Sends a goodbye email to the given user.
 function sendGoodbyEmail(email, displayName) {
   const mailOptions = {
@@ -189,3 +190,4 @@ exports.sendEmailConfirmation = functions.database.ref('/orders/{orderId}').onCr
                           });
 
 });
+
