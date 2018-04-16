@@ -8,13 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./host-header.component.css']
 })
 export class HostHeaderComponent implements OnInit {
-
+  toggleMenu=false;
   constructor(private authService:AuthService,
               private router: Router) { }
 
   ngOnInit() {
   }
 
+  onToggleMenu() {
+    this.toggleMenu = !this.toggleMenu;
+  }
   logout(){
     this.authService.singOut();
     this.router.navigateByUrl('/home');

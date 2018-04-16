@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  toggleMenu = false;
   constructor(private authService: AuthService,
               private authGuard:AuthGuardService,
               private router: Router) {
@@ -18,5 +19,9 @@ export class HeaderComponent {
       logout(){
         this.authService.singOut();
         this.router.navigateByUrl('/home');
+      }
+
+      onToggleMenu() {
+        this.toggleMenu = !this.toggleMenu;
       }
 }
