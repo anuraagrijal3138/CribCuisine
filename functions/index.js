@@ -133,7 +133,7 @@ function sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineNam
   mailOptions.subject = `Confirmation regarding your recent Booking!`;
   mailOptions.text = `Hey ${guestName || ''}!, We confirm that you are now booked to enjoy ${cuisineName}. Here are the details of your host:
                       host name: ${hostName}
-                      host email: ${hostName}
+                      host email: ${hostEmail}
                       location: ${hostDorm}, ${hostStreetAddress1}, ${hostStreetAddress2}
                       time: ${startTime}`;
   return mailTransport.sendMail(mailOptions).then(() => {

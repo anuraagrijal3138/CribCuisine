@@ -18,9 +18,6 @@ export class CuisinesService {
 		this.cuisines = db.list('cuisines').valueChanges();
 		this.usercuisines = db.list('user-cuisines/'+as.auth.currentUser.uid).valueChanges();
 	}
-
-
-
 }
 
 
