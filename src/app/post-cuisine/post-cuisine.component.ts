@@ -112,6 +112,7 @@ writeNewPost(uid, cuisineName, description, hostingDate, hostingTime, dormName,
   // Get a key for a new Post.
   var newPostKey = this.authService.db.ref().child('cuisines').push().key;
   var hostname = this.authService.auth.currentUser.displayName;
+  var hostEmail = this.authService.auth.currentUser.email;
   var hostImage = this.authService.auth.currentUser.photoURL;
   var hostMetadata = this.authService.auth.currentUser.metadata;
   //var rating = this.authService.auth.currentUser.
@@ -150,9 +151,12 @@ writeNewPost(uid, cuisineName, description, hostingDate, hostingTime, dormName,
             imgPostKey : newPostKey,
             hostName : hostname,
             hostImage: hostImage,
+            hostEmail: hostEmail,
             hostMetadata: hostMetadata,
             price: price,
-            imgUrl: url
+            imgUrl: url,
+            remainingCapacity: numberCust,
+            canAccomodateMore: true
             };
 
           // Write the new post's data simultaneously in the posts list and the user's post list.

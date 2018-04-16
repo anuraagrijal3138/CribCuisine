@@ -11,6 +11,7 @@ declare let paypal: any;
 })
 export class CuisineDetailComponent implements AfterViewChecked{
   @Input() cuisine;
+  finalprice: Number;
   addScript: boolean = false;
   paypalLoad: boolean = true;
 
@@ -19,7 +20,7 @@ export class CuisineDetailComponent implements AfterViewChecked{
   paypalConfig = {
     env: 'sandbox',
     client: {
-      sandbox: 'AQUfAVPgQ6eWs0qryCWjXpy7Ka-DAPYvo0tE40Id68nOdjBPQ7kLzsiQrEaIhQ4VY3QTk6w-WEw9thBw',
+      sandbox: 'AU5MjCSiXrLeQ5n-LMi2kqned0omPAYnurQ24yKZKT5u-lERfUW8EPj9yBjHvrs19pRis3pfkvc3-VO3',
       production: '<your-production-key here>'
     },
     commit: true,
@@ -27,7 +28,7 @@ export class CuisineDetailComponent implements AfterViewChecked{
       return actions.payment.create({
         payment: {
           transactions: [
-            { amount: { total: this.cuisine.price, currency: 'USD' } }
+            { amount: { total: this.finalprice, currency: 'USD' } }
           ]
         }
       });
@@ -35,6 +36,33 @@ export class CuisineDetailComponent implements AfterViewChecked{
     onAuthorize: (data, actions) => {
       return actions.payment.execute().then((payment) => {
         //Do something when payment is successful.
+        console.log("successful paypal payment");
+        console.log(payment);
+        console.log(this.cuisine);
+        console.log(this.authService.auth.currentUser);
+        var dbReference = this.authService.db.ref();
+        dbReference.child('orders/'+payment.id).set({
+          hostId: this.cuisine.uid,
+          buyerId: this.authService.auth.currentUser.uid,
+          cuisineID: this.cuisine.imgPostKey,
+          priceBeforePaypalService: this.cuisine.price,
+          priceAfterPaypalService: payment.transactions["0"].amount.total,
+          hostEmail: this.cuisine.hostEmail,
+          hostingDate: this.cuisine.hostingDate,
+          buyerEmail: this.authService.auth.currentUser.email,
+          startTime: this.cuisine.hostingTime, 
+          endTime: this.cuisine.hostingTime,
+          partySize: 1,
+          dormName: this.cuisine.dormName,
+          streetAddress1: this.cuisine.streetAddress1,
+          streetAddress2: this.cuisine.streetAddress2,
+          paypalTransactionId: payment.transactions["0"].related_resources["0"].sale.id,
+          hostName: this.cuisine.hostName,
+          buyerName: this.authService.auth.currentUser.displayName,
+          cuisineName: this.cuisine.cuisineName
+
+        }).then((success)=> console.log("successfully written to orders in db"))
+          .catch((error)=> console.log("error while wrtitng order to database"))
       })
     }
   };
@@ -48,10 +76,17 @@ export class CuisineDetailComponent implements AfterViewChecked{
         this.paypalLoad = false;
       })
     }
+
+
   }
 
   addPaypalScript() {
     this.addScript = true;
+    var finalpriceConversion = (Number(this.cuisine.price) + 0.30+ (0.029*Number(this.cuisine.price))).toFixed(2);
+    console.log(finalpriceConversion);
+    this.finalprice = Number(finalpriceConversion);
+    console.log(this.finalprice);
+
     return new Promise((resolve, reject) => {
       let scripttagElement = document.createElement('script');
       scripttagElement.src = 'https://www.paypalobjects.com/api/checkout.js';

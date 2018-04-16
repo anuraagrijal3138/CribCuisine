@@ -76,46 +76,116 @@ exports.sendByeEmail = functions.auth.user().onDelete((user) => {
     });
     // [END sendByeEmail]
     
-    // Sends a welcome email to the given user.
-    function sendWelcomeEmail(email, displayName) {
-      const mailOptions = {
-        from: `${APP_NAME} <noreply@firebase.com>`,
-        to: email,
-      };
-    
-      // The user subscribed to the newsletter.
-      mailOptions.subject = `Welcome to ${APP_NAME}!`;
-      mailOptions.text = `Hey ${displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`;
-      return mailTransport.sendMail(mailOptions).then(() => {
-        return console.log('New welcome email sent to:', email);
-      });
-    }
-    
-    // Sends a goodbye email to the given user.
-    function sendGoodbyEmail(email, displayName) {
-      const mailOptions = {
-        from: `${APP_NAME} <noreply@firebase.com>`,
-        to: email,
-      };
-    
-      // The user unsubscribed to the newsletter.
-      mailOptions.subject = `Bye!`;
-      mailOptions.text = `Hey ${displayName || ''}!, We confirm that we have deleted your ${APP_NAME} account.`;
-      return mailTransport.sendMail(mailOptions).then(() => {
-        return console.log('Account deletion confirmation email sent to:', email);
-      });
-    }
+// Sends a welcome email to the given user.
+function sendWelcomeEmail(email, displayName) {
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: email,
+  };
 
-    exports.addUserToDB = functions.auth.user().onCreate(event => {
-        admin.database().ref('/users/' + event.data.uid).set({
-          name: event.data.displayName,
-          email: event.data.email,
-          photoURL: event.data.photoURL,
-          hostRating: 0,
-          userRating: 0,
-          isHost: false,
-          hostedCuisines: {},
-          bookedCuisines: {}
-        });
-      });
-                                            
+  // The user subscribed to the newsletter.
+  mailOptions.subject = `Welcome to ${APP_NAME}!`;
+  mailOptions.text = `Hey ${displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+     return console.log('New welcome email sent to:', email);
+  });
+}
+    
+// Sends a goodbye email to the given user.
+function sendGoodbyEmail(email, displayName) {
+  const mailOptions = {
+    from: `${APP_NAME} <noreply@firebase.com>`,
+    to: email,
+  };
+
+  // The user deleted their account
+  mailOptions.subject = `Bye!`;
+  mailOptions.text = `Hey ${displayName || ''}!, We confirm that we have deleted your ${APP_NAME} account.`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    return console.log('Account deletion confirmation email sent to:', email);
+  });
+}
+
+// Sends a Email to host letting them know they have a new Guest 
+function sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName) {
+  const mailOptions = {
+    from: `${APP_NAME} `,
+    to: hostEmail,
+  };
+
+
+  mailOptions.subject = `You have a new Guest!`;
+  mailOptions.text = `Hey ${hostName || ''}!, We confirm that you have a new Guest for ${cuisineName}. Here are the details of your guest:
+                      Guest name: ${guestName} 
+                      Guest email: ${guestEmail}`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    return console.log('Host confirmation email sent to:', hostEmail);
+  });
+}
+
+function sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineName, hostDorm, hostStreetAddress1, hostStreetAddress2, startTime) {
+  const mailOptions = {
+    from: `${APP_NAME} `,
+    to: guestEmail,
+  };
+
+
+  mailOptions.subject = `Confirmation regarding your recent Booking!`;
+  mailOptions.text = `Hey ${guestName || ''}!, We confirm that you are now booked to enjoy ${cuisineName}. Here are the details of your host:
+                      host name: ${hostName}
+                      host email: ${hostName}
+                      location: ${hostDorm}, ${hostStreetAddress1}, ${hostStreetAddress2}
+                      time: ${startTime}`;
+  return mailTransport.sendMail(mailOptions).then(() => {
+    return console.log('Guest confirmation email sent to:', guestEmail);
+  });
+}
+
+exports.addUserToDB = functions.auth.user().onCreate(event => {
+    admin.database().ref('/users/' + event.data.uid).set({
+      name: event.data.displayName,
+      email: event.data.email,
+      photoURL: event.data.photoURL,
+      hostRating: 0,
+      userRating: 0,
+      isHost: false,
+      hostedCuisines: {},
+      bookedCuisines: {}
+    });
+  });
+          
+  
+// Sends an email confirmation when a user changes his mailing list subscription.
+exports.sendEmailConfirmation = functions.database.ref('/orders/{orderId}').onCreate((newOrder) => {
+  console.log(newOrder);
+  console.log(newOrder.data._newData);
+  console.log(newOrder.data);
+
+  const val = newOrder.data._newData;
+ 
+
+
+  var hostEmail = val.hostEmail;
+  var hostName = val.hostName;
+  var guestName = val.buyerName;
+  var guestEmail = val.buyerEmail;
+  var cuisineName = val.cuisineName;
+  var hostDorm = val.dormName;
+  var hostStreetAddress1 = val.streetAddress1;
+  var hostStreedAddress2 = val.streetAddress2;
+  var startTime = val.startTime;
+
+  return sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineName, hostDorm, hostStreetAddress1, hostStreedAddress2, startTime)
+                          .then((success)=>{
+                            return sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName)
+                              .then((success)=> console.log("send email to host succeed"))
+                                .catch((error)=> {console.log("error while sending email to Host");
+                                        console.log(error);                
+                              })
+                          }).catch((error) => {
+                            console.log("Failed to send Email to Guest");
+                            console.log(error);
+                          
+                          });
+
+});
