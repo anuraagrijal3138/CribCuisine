@@ -13,13 +13,13 @@ class="navbar navbar-default">
             </button>    
         </div>
         <div class="collapse navbar-collapse" [ngClass] = "{ 'toggleMenuStyle': toggleMenu === true}">
-            <ul class="nav navbar-nav">
-                    <li routerLinkActive="active"><a routerLink="/cuisines">Cuisines</a></li>
-                    <li routerLinkActive="active"><a 
-                        routerLink="/id/dashboard">Become a Host</a></li>
+            <ul class="nav navbar-nav navbar-right">
+                <li routerLinkActive="active"><a routerLink="/id/dashboard">Dashboard</a></li>
+                <li routerLinkActive="active"><a 
+                    routerLink="/id/postcuisine">Become a host</a></li>
                 <li><a
                     class="align-right"
-                    (click) = "logout()" href>LogOut</a></li>
+                    (click) = "logout()" href><span class="glyphicon glyphicon-off"></span> LogOut</a></li>
             </ul>
         </div>      
     </div>
