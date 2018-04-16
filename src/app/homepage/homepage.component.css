@@ -17,7 +17,19 @@
   background-size: 100% 100%;
 
 }
+h5 {
+  display: inline-block;
+  padding: 10px;
+  background: #B9121B;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
 
+.p {
+  text-align: center;
+  padding-top: 40px;
+  font-size: 13px;
+}
 
 .cusDiv {
   height: 500px;
@@ -3314,31 +3326,6 @@
   animation-name: slideInDown;
 }
 
-@-webkit-keyframes slideInLeft {
-  from {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    from {
-  }
-}
-
-@keyframes slideInLeft {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
 
 .slideInLeft {
   -webkit-animation-name: slideInLeft;
