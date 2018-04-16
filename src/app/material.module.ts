@@ -9,6 +9,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   imports: [MatInputModule,  
@@ -20,6 +21,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCheckboxModule,
     MatIconModule,
     MatTabsModule,
+    MatExpansionModule,
     MatFormFieldModule],
   exports: [MatInputModule, 
     MatStepperModule, 
@@ -30,6 +32,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatCheckboxModule,
     MatIconModule,
     MatTabsModule,
+    MatExpansionModule,
     MatFormFieldModule],
 })
 export class Material { }

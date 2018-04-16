@@ -14,8 +14,12 @@ export class CuisineDetailComponent implements AfterViewChecked{
   finalprice: Number;
   addScript: boolean = false;
   paypalLoad: boolean = true;
+  // remainingCuisine: Number;
 
-  constructor(private authService : AuthService){  }
+  constructor(private authService : AuthService){ 
+    // this.remainingCuisine = this.cuisine.remainingCapacity;
+    // console.log(this.remainingCuisine);
+   }
 
   paypalConfig = {
     env: 'sandbox',
