@@ -13,10 +13,14 @@ export class CuisinesService {
 	
 	cuisines : Observable<any[]>;	
 	usercuisines: Observable<any[]>;
+	notification: Observable<any[]>;
+	bookedCuisines: Observable<any[]>;
 
 	constructor(db: AngularFireDatabase, as: AuthService){
 		this.cuisines = db.list('cuisines').valueChanges();
 		this.usercuisines = db.list('user-cuisines/'+as.auth.currentUser.uid).valueChanges();
+		this.notification = db.list('users/'+as.auth.currentUser.uid+ '/notification').valueChanges();	
+		this.bookedCuisines = db.list('users/'+as.auth.currentUser.uid+ '/bokedcuisines').valueChanges();
 	}
 }
 

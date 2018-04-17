@@ -9,6 +9,39 @@
       </p>
       <app-hostcuisines></app-hostcuisines>
     </mat-tab>
-    <mat-tab label="Booked Cuisines">Content 2</mat-tab>
-    <mat-tab label="Notifications">Content 2</mat-tab>
+    <mat-tab label="Booked Cuisines">
+        <mat-expansion-panel *ngFor="let book of (booked | async)">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  {{ book.cuisineName }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-panel-description>
+            <mat-list>
+                <mat-list-item>Date: {{ book.date }}</mat-list-item>
+                <mat-list-item>Time: {{ book.startTime }}</mat-list-item>
+                <mat-list-item>Dorm: {{ book.dormName }}</mat-list-item>
+                <mat-list-item>Address1: {{ book.streetAddress1 }}</mat-list-item>
+                <mat-list-item>Address2: {{ book.streetAddress2 }}</mat-list-item>
+                <mat-divider></mat-divider>
+              </mat-list>
+              </mat-panel-description>
+            </mat-expansion-panel>
+    </mat-tab>
+    <mat-tab label="Notifications">
+        <mat-list *ngFor="let notifi of (notifications | async)">
+            <mat-list-item>{{ notifi.notification }}</mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+    </mat-tab>
   </mat-tab-group>
+
+  <!-- <mat-list *ngFor="let book of (booked | async)">
+      <mat-list-item>Cuisine Name: {{ book.cuisineName }}</mat-list-item>
+      <mat-list-item>Date: {{ book.date }}</mat-list-item>
+      <mat-list-item>Time: {{ book.startTime }}</mat-list-item>
+      <mat-list-item>Dorm: {{ book.dormName }}</mat-list-item>
+      <mat-list-item>Address1: {{ book.streetAddress1 }}</mat-list-item>
+      <mat-list-item>Address2: {{ book.streetAddress2 }}</mat-list-item>
+      <mat-divider></mat-divider>
+  </mat-list> -->
