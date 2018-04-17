@@ -22,10 +22,10 @@ export class CuisineDetailComponent implements AfterViewChecked{
    }
 
   paypalConfig = {
-    env: 'sandbox',
+    env: 'production',
     client: {
-      sandbox: 'AU5MjCSiXrLeQ5n-LMi2kqned0omPAYnurQ24yKZKT5u-lERfUW8EPj9yBjHvrs19pRis3pfkvc3-VO3',
-      production: '<your-production-key here>'
+      //sandbox: 'AU5MjCSiXrLeQ5n-LMi2kqned0omPAYnurQ24yKZKT5u-lERfUW8EPj9yBjHvrs19pRis3pfkvc3-VO3',
+      production: 'Ac-hB9I1OiRKS168vZ3lpCR8j7khgGINxalhcN_WF0NaY72CTgxFKHBLQHM_51Fhcc3DuMUcrPesdC7S'
     },
     commit: true,
     payment: (data, actions) => {
