@@ -55,8 +55,8 @@ const APP_NAME = 'CribCuisine';
 
 exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
 
-  const email = user.data.email;
-  const displayName = user.data.displayName; 
+  const email = user.email;
+  const displayName = user.displayName; 
   return sendWelcomeEmail(email, displayName);
 });
 
@@ -170,10 +170,10 @@ exports.addUserToDB = functions.auth.user().onCreate((user) => {
 // Sends an email confirmation when a user changes his mailing list subscription.
 exports.sendEmailConfirmation = functions.database.ref('/orders/{orderId}').onCreate((newOrder) => {
   console.log(newOrder);
-  console.log(newOrder.data._newData);
+  console.log(newOrder._data);
   console.log(newOrder.data);
 
-  const val = newOrder.data._newData;
+  const val = newOrder._data;
  
   var guestId = val.buyerId;
   var hostId = val.hostId;
@@ -186,11 +186,19 @@ exports.sendEmailConfirmation = functions.database.ref('/orders/{orderId}').onCr
   var hostStreetAddress1 = val.streetAddress1;
   var hostStreedAddress2 = val.streetAddress2;
   var startTime = val.startTime;
+  var hostingDate = val.hostingDate;
+  var cusisineId = val.cuisineID;
 
   return sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineName, hostDorm, hostStreetAddress1, hostStreedAddress2, startTime, guestId)
                           .then((success)=>{
                             return sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName, hostId)
-                              .then((success)=> console.log("send email to host succeed"))
+                              .then((success)=> {
+                                console.log("send email to host succeed");
+                                return addBookedCuisines(guestId, cusisineId, cuisineName, hostDorm, hostStreetAddress1, hostStreedAddress2, startTime, hostingDate )
+                                  .then((success) => console.log("successfuly added on user's bookedCuisines"))
+                                    .catch((error) => console.log("error while adding to users booked cuisines"))
+                                        
+                            })
                                 .catch((error)=> {console.log("error while sending email to Host");
                                         console.log(error);                
                               })
@@ -212,6 +220,20 @@ function addNewNotification(message, userID){
   var newNotificationRef = admin.database().ref('/users/' + userID+'/notification').push();
   return newNotificationRef.set({
     notification: message
+  });
+
+}
+
+function addBookedCuisines(userID, cuisineID, name, dorm, address1, address2, time, date ){
+  var bookedCuisineRef = admin.database().ref('/users/' + userID+'/bokedcuisines/'+cuisineID);
+  
+  return bookedCuisineRef.set({
+    cuisineName: name,
+    dormName: dorm,
+    streetAddress1: address1,
+    streetAddress2: address2,
+    startTime: time,
+    date: date
   });
 
 }
