@@ -15,20 +15,21 @@
         <mat-label>Cuisine Name</mat-label>
         <input matInput 
         formControlName="cuisineName">
-        <mat-error>This field is required</mat-error>
       </mat-form-field>
 
       <mat-form-field
       class="full-width">
         <mat-label>Description</mat-label>
-        <input matInput formControlName="description">
+        <textarea matInput matTextareaAutosize
+            matAutosizeMaxRows="5" formControlName="description"></textarea>
+        <!-- <input matInput formControlName="description"> -->
         <mat-error>This field is required</mat-error>
       </mat-form-field>
 
       <mat-form-field
       class="full-width">
         <mat-label>Hosting Date</mat-label>
-        <input matInput type="date" formControlName="hostingDate">
+        <input matInput type="date" [min]="utc" formControlName="hostingDate">
         <mat-error>This field is required</mat-error>
       </mat-form-field>
 
@@ -45,7 +46,8 @@
       <mat-form-field
       class="full-width">
         <mat-label>Price</mat-label>
-        <input matInput formControlName="price">
+        <input matInput type="number" formControlName="price">
+        <span matPrefix>$&nbsp;</span>
         <mat-error>This field is required</mat-error>
       </mat-form-field>
       <div>
@@ -105,7 +107,7 @@
       <ng-template matStepLabel>Number of Accomodations</ng-template>
       <mat-form-field>
           <mat-label>Number of customers</mat-label>
-          <input matInput formControlName="numberCust" min="1">
+          <input matInput type="number" formControlName="numberCust">
         </mat-form-field>
       <div>
           <button type="button" mat-button (click)="linearVerticalStepper.reset()">Reset</button>

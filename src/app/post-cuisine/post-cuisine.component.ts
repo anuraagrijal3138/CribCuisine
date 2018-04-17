@@ -15,12 +15,15 @@ import { AuthService } from '../auth.service';
 export class PostCuisineComponent implements OnInit{
   formGroup: FormGroup;
   files: FileList;
-
+  utc: string;
   /** Returns a FormArray with the name 'formArray'. */
   get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
 
   constructor(private _formBuilder: FormBuilder,private authService: AuthService,
-    private router: Router ) { }
+    private router: Router ) { 
+      this.utc = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+      console.log(this.utc);
+    }
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
@@ -30,12 +33,12 @@ export class PostCuisineComponent implements OnInit{
           description: ['', Validators.required],
           hostingDate: ['', Validators.required],
           hostingTime: ['', Validators.required],
-          price: ['', Validators.required] 
+          price: ['', Validators.required ]
         }),
         this._formBuilder.group({
           dormName: ['', Validators.required],
           streetAddress1: ['', Validators.required],
-          streetAddress2: ['', Validators.required],
+          streetAddress2: [''],
           cityName: ['', Validators.required],
           stateName: ['', Validators.required]
         }),
