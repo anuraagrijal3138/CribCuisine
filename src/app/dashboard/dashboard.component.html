@@ -4,12 +4,13 @@
 </h1>
 <mat-tab-group>
     <mat-tab label="Hosted Cuisines">
-      <p>
-        These are the cuisines you posted!
-      </p>
+      <p>Below are your Hosted Cuisines.</p>
       <app-hostcuisines></app-hostcuisines>
     </mat-tab>
     <mat-tab label="Booked Cuisines">
+      <p *ngIf="isEmpty">Oops looks like you dont have booked cuisines.You can book cuisines from 
+        <a routerLink="/cuisines">here.</a>
+      </p>
         <mat-expansion-panel *ngFor="let book of (booked | async)">
             <mat-expansion-panel-header>
               <mat-panel-title>
