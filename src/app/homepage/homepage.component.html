@@ -9,99 +9,30 @@
   </div><!-- End container -->
 </div><!-- End jumbotron-->
 
-<div class="container cusDiv longBoat animated slideInDown">
-    <h2 class="white animated rollIn">Order.<small class="white animated rollIn"> Easily order online!</small></h2>
-
-    <div class="row">
-      <div class="col-lg-12" id="order">
-        <h3 class="white animated rollIn">Order food Online!</h3>
-        <p class="white animated rollIn">Browse the menu and order the food of your choice.</p>
-        </div>      
+<ngb-carousel *ngIf="images">
+  <ng-template ngbSlide>
+    <img [src]="images[0]" alt="Random first slide">
+    <div class="carousel-caption">
+      <h3>10 seconds between slides...</h3>
+      <p>This carousel uses customized default values.</p>
     </div>
-</div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img [src]="images[1]"  alt="Random second slide">
+    <div class="carousel-caption">
+      <h3>No keyboard...</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img [src]="images[2]" alt="Random third slide">
+    <div class="carousel-caption">
+      <h3>And no wrap after last slide.</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
 
-<hr>
-
-<div class="container cusDiv eatDine">
-</div>
-
-<div class="container">
-    <section>
-        <div class="page-header" id="enjoy">
-            <h2 class="animated rollIn">Enjoy.<small class="animated rollIn"> Enjoy your food!</small></h2>
-          </div>
-
-      <div class="row">
-          <div class="col-lg-6" id="enjoy">
-              <img src="http://images.wisegeek.com/woman-in-gray-eating-sushi-with-chopsticks.jpg" alt="" class="img-responsive animated flipInX">
-          </div>
-        <div class="col-lg-6">
-          <h3 class="animated slideInRight">Enjoy yor food.</h3>
-          <p class="animated slideInRight">Food of your choice.</p>
-        </div>
-      </div>
-    </section>
-</div>
-
-<div class="container">
-  <section>
-      <div class="page-header" id="contact">
-          <h2>Contact Us.<small> Give feedback!</small></h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4">
-            <address>
-              <strong>CribCuisine Pvt Ltd.</strong><br>
-            </address>
-              anuraagrijal@gmail.com<br>
-              ashimpaudel@gmail.com<br>
-              P: (111) 111-1111
-          </div>
-          <div class="col-lg-8">
-            <form action="" class="form-horizontal">
-              <div class="form-group">
-                <label for="user-name" class="col-lg-2 control-label">
-                  Name
-                </label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" id="user-name" placeholder="Enter you name">
-                </div>
-              </div>
-
-              <div class="form-group">
-                  <label for="user-email" class="col-lg-2 control-label">Email</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="user-email" placeholder="Enter you Email Address">
-                  </div>
-                </div><!-- End form group -->
-  
-                <div class="form-group">
-                  <label for="user-url" class="col-lg-2 control-label">Your Website</label>
-                  <div class="col-lg-10">
-                    <input type="text" class="form-control" id="user-email" placeholder="If you have Any.">
-                  </div>
-                </div><!-- End form group -->
-  
-                <div class="form-group">
-                  <label for="user-message" class="col-lg-2 control-label">Any Message</label>
-                  <div class="col-lg-10">
-                    <textarea name="user-message" id="user-message" class="form-control" 
-                    cols="20" rows="10" placeholder="Enter your Message"></textarea>
-                  </div>
-                </div><!-- End form group -->
-  
-                <div class="form-group">
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                </div>
-            </form>
-          </div>
-        </div>
-
-  </section>
-</div>
 
 <footer>
   <hr>
