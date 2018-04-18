@@ -8,16 +8,21 @@
 
   <body>
 
-<div class="jumbotron animated rotateInDownRight">
   <div class="container text-center">
-    <h1>CribCuisine</h1>
+      <ul>
+          <li><a class="active" href="#home">Home</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+    <!-- <h1>CribCuisine</h1>
     <p> Find delicious homemade food near you. </p>
 
     <div class="btn-group">
       <button (click)="login()" class="btn btn-lg btn-warning">Login with Google!</button>
-    </div>
-  </div><!-- End container -->
-</div><!-- End jumbotron-->
+    </div> -->
+  </div>
+
 
 <ngb-carousel *ngIf="images">
   <ng-template ngbSlide>

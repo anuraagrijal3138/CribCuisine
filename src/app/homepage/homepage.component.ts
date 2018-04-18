@@ -10,9 +10,9 @@ import {HttpClient} from '@angular/common/http';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent  {
   email: Promise<String>;
-  images: Array<string>;
+  images: Array<string> = ['./../../assets/images/4.jpg', './../../assets/images/2.jpg', './../../assets/images/3.jpg'];
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -23,20 +23,7 @@ export class HomepageComponent implements OnInit {
                 
                }
 
-  //carousel 
-  ngOnInit() {
-    this._http.get('https://picsum.photos/list')
-        .pipe(map((images: Array<{id: number}>) => this._randomImageUrls(images)))
-        .subscribe(images => this.images = images);
-  }
 
-  private _randomImageUrls(images: Array<{id: number}>): Array<string> {
-    return [1, 2, 3].map(() => {
-      const randomId = images[Math.floor(Math.random() * images.length)].id;
-      return `https://picsum.photos/900/500?image=${randomId}`;
-    });
-    
-  }
 
 
   
