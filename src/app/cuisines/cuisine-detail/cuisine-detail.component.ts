@@ -14,17 +14,44 @@ export class CuisineDetailComponent implements AfterViewChecked{
   finalprice: Number;
   addScript: boolean = false;
   paypalLoad: boolean = true;
+  // remainingCuisine: Number;
 
-  constructor(private authService : AuthService){  }
+  constructor(private authService : AuthService){ 
+    // this.remainingCuisine = this.cuisine.remainingCapacity;
+    // console.log(this.remainingCuisine);
+   }
 
   paypalConfig = {
-    env: 'sandbox',
+    env: 'production',
     client: {
-      sandbox: 'AU5MjCSiXrLeQ5n-LMi2kqned0omPAYnurQ24yKZKT5u-lERfUW8EPj9yBjHvrs19pRis3pfkvc3-VO3',
-      production: '<your-production-key here>'
+      //sandbox: 'AU5MjCSiXrLeQ5n-LMi2kqned0omPAYnurQ24yKZKT5u-lERfUW8EPj9yBjHvrs19pRis3pfkvc3-VO3',
+      production: 'Ac-hB9I1OiRKS168vZ3lpCR8j7khgGINxalhcN_WF0NaY72CTgxFKHBLQHM_51Fhcc3DuMUcrPesdC7S'
     },
     commit: true,
     payment: (data, actions) => {
+      if (this.cuisine.remainingCapacity < 1){
+        
+
+        //window.alert("Sorry, this listing cannot accomodate any new guests ");
+        var displayDate = new Date();
+        console.log(displayDate);
+        console.log("cannot accomodate more members");
+
+      return null;
+      }
+
+      //handle the date logic, fails to open paypal if it has past the hosting date
+      var dateArray = this.cuisine.hostingDate.split("-");
+      var timeArray = this.cuisine.hostingTimeMilitary.split(":");
+      var hostTime = new Date(dateArray[0], dateArray[1]-1, dateArray[2], timeArray[0], timeArray[1]).getTime();
+      var timeDifference = hostTime - new Date().getTime();
+      console.log(timeDifference);
+
+      // if (timeDifference < 0){
+      //   return null;
+      // }
+
+      
       return actions.payment.create({
         payment: {
           transactions: [
@@ -61,7 +88,12 @@ export class CuisineDetailComponent implements AfterViewChecked{
           buyerName: this.authService.auth.currentUser.displayName,
           cuisineName: this.cuisine.cuisineName
 
-        }).then((success)=> console.log("successfully written to orders in db"))
+        }).then((success)=> {console.log("successfully written to orders in db");
+                            dbReference.child('/cuisines/'+this.cuisine.imgPostKey)
+                              .update({remainingCapacity: this.cuisine.remainingCapacity-1})
+                                .then((success)=> console.log("successfully decreased remaining capacity"))
+                                  .catch((error)=> console.log("error while decreasing remaing capacity"))
+      })
           .catch((error)=> console.log("error while wrtitng order to database"))
       })
     }
@@ -70,7 +102,7 @@ export class CuisineDetailComponent implements AfterViewChecked{
   
 
   ngAfterViewChecked(): void {
-    if (!this.addScript) {
+    if (!this.addScript ) {
       this.addPaypalScript().then(() => {
         paypal.Button.render(this.paypalConfig, '#paypal-checkout-btn');
         this.paypalLoad = false;
@@ -81,6 +113,7 @@ export class CuisineDetailComponent implements AfterViewChecked{
   }
 
   addPaypalScript() {
+
     this.addScript = true;
     var finalpriceConversion = (Number(this.cuisine.price) + 0.30+ (0.029*Number(this.cuisine.price))).toFixed(2);
     console.log(finalpriceConversion);

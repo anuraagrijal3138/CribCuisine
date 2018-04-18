@@ -15,12 +15,15 @@ import { AuthService } from '../auth.service';
 export class PostCuisineComponent implements OnInit{
   formGroup: FormGroup;
   files: FileList;
-
+  utc: string;
   /** Returns a FormArray with the name 'formArray'. */
   get formArray(): AbstractControl | null { return this.formGroup.get('formArray'); }
 
   constructor(private _formBuilder: FormBuilder,private authService: AuthService,
-    private router: Router ) { }
+    private router: Router ) { 
+      this.utc = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+      console.log(this.utc);
+    }
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
@@ -30,12 +33,12 @@ export class PostCuisineComponent implements OnInit{
           description: ['', Validators.required],
           hostingDate: ['', Validators.required],
           hostingTime: ['', Validators.required],
-          price: ['', Validators.required] 
+          price: ['', Validators.required ]
         }),
         this._formBuilder.group({
           dormName: ['', Validators.required],
           streetAddress1: ['', Validators.required],
-          streetAddress2: ['', Validators.required],
+          streetAddress2: [''],
           cityName: ['', Validators.required],
           stateName: ['', Validators.required]
         }),
@@ -54,6 +57,7 @@ export class PostCuisineComponent implements OnInit{
 
   onSubmit() {
     console.log(this.formGroup.value.formArray);
+    var militaryTime = this.formGroup.value.formArray[0].hostingTime;
     var time = this.formGroup.value.formArray[0].hostingTime;
     time = time.split(':');
     var hours = Number(time[0]);
@@ -92,7 +96,7 @@ export class PostCuisineComponent implements OnInit{
 
     this.writeNewPost
     (this.authService.auth.currentUser.uid, cuisineName, description, hostingDate, hostingTime, dormName,
-       streetAddress1, streetAddress2, cityName, stateName, numberCust, price)
+       streetAddress1, streetAddress2, cityName, stateName, numberCust, price, militaryTime)
       .then((success) => {
         // this.uploadToStorage(this.uid,this.newPostKey).then((success)=>console.log(success))
           // .catch((error)=>console.log(error));
@@ -108,13 +112,14 @@ export class PostCuisineComponent implements OnInit{
 
 
 writeNewPost(uid, cuisineName, description, hostingDate, hostingTime, dormName,
-       streetAddress1, streetAddress2, cityName, stateName, numberCust, price){
+       streetAddress1, streetAddress2, cityName, stateName, numberCust, price, militaryTime){
   // Get a key for a new Post.
   var newPostKey = this.authService.db.ref().child('cuisines').push().key;
   var hostname = this.authService.auth.currentUser.displayName;
   var hostEmail = this.authService.auth.currentUser.email;
   var hostImage = this.authService.auth.currentUser.photoURL;
   var hostMetadata = this.authService.auth.currentUser.metadata;
+  
   //var rating = this.authService.auth.currentUser.
 
 
@@ -156,7 +161,8 @@ writeNewPost(uid, cuisineName, description, hostingDate, hostingTime, dormName,
             price: price,
             imgUrl: url,
             remainingCapacity: numberCust,
-            canAccomodateMore: true
+            canAccomodateMore: true,
+            hostingTimeMilitary: militaryTime
             };
 
           // Write the new post's data simultaneously in the posts list and the user's post list.

@@ -1,19 +1,13 @@
-<app-host-header></app-host-header>
-<h1>
-  Welcome {{ userName }}
-</h1>
-<p>
-  These are the cuisines you posted!
-</p>
+
 
 <div class="row">
         
-    <div class="col-xs-12">
+    <div class="col-xs-6">
            <app-cuisine-item 
            *ngFor="let cuisineEl of (hostcuisines | async)"
            [cuisine] = "cuisineEl"></app-cuisine-item>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
         <app-hostcuisinedetails
         *ngIf = "hostSelectedCuisine;else infoText"
         [cuisine] = "hostSelectedCuisine"></app-hostcuisinedetails>

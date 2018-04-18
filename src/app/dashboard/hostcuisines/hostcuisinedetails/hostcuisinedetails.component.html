@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-xs-12">
       <h1 align="center">
         {{ cuisine.cuisineName }}
@@ -71,7 +71,28 @@
       </div>
       <div id="lastDiv"></div>
       <div class="row">
-          <button type="button" (click)="deleteListing(cuisine)">Delete listing</button>
+          <button mat-fab color="warn"
+          type="button" (click)="deleteListing(cuisine)">Delete</button>
         </div>
-  
-  </div>
+   </div> -->
+
+
+   <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{ cuisine.cuisineName }}</mat-card-title>
+        <mat-card-subtitle>Hosted by: {{ cuisine.hostName }}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{ cuisine.imgUrl }}" alt="{{ cuisine.name }}" class="img-responsive"
+      style = "max-height: 300px;">
+      <mat-card-content>
+          <mat-card>{{ cuisine.description }}</mat-card>
+          <mat-card>Hosting Date: {{ cuisine.hostingDate }}</mat-card>
+          <mat-card>Hosting Time: {{ cuisine.hostingTime }}</mat-card>
+          <mat-card>Location: {{ cuisine.dormName }}</mat-card>
+          <mat-card>Number of Guests: {{ cuisine.numberCust }}</mat-card>
+          <mat-card>Price: ${{ cuisine.price }}</mat-card>
+      </mat-card-content>
+    </mat-card>
+
+    <button mat-raised-button color="warn" style="margin-left:100px"
+        type="button" (click)="deleteListing(cuisine)">Delete</button>

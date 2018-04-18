@@ -1,18 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import {map} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   email: Promise<String>;
+  images: Array<string>;
+
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              config: NgbCarouselConfig, private _http: HttpClient) {
+                config.interval = 800;
+                config.wrap = true;
+                config.keyboard = true;
                 
                }
+
+  //carousel 
+  ngOnInit() {
+    this._http.get('https://picsum.photos/list')
+        .pipe(map((images: Array<{id: number}>) => this._randomImageUrls(images)))
+        .subscribe(images => this.images = images);
+  }
+
+  private _randomImageUrls(images: Array<{id: number}>): Array<string> {
+    return [1, 2, 3].map(() => {
+      const randomId = images[Math.floor(Math.random() * images.length)].id;
+      return `https://picsum.photos/900/500?image=${randomId}`;
+    });
+    
+  }
+
+
+  
 
   signInWithGoogle()  {
     this.email= this.authService.signInWithGoogle()

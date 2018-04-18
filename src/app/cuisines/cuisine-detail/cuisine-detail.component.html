@@ -57,7 +57,7 @@
     <div class="row">
         <div class="col-xs-12">
           <p align="center">
-          number of Guests: {{ cuisine.numberCust }}
+          number of Guests: {{ cuisine.remainingCapacity }}
         </p>
         </div>
       </div>
@@ -71,10 +71,19 @@
     </div>
     <div id="lastDiv"></div>
 
-<h2 *ngIf="paypalLoad">Paypal button is loading</h2>
-<div style="padding-left:250px;">
-  <div id="paypal-checkout-btn" ></div>
-</div>
+    <mat-expansion-panel *ngIf="cuisine.remainingCapacity>0; else booked">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Book it!
+          </mat-panel-title>
+          <mat-panel-description>
+            Paypal, Debit Card and Credit Card accepted
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <h2 *ngIf="paypalLoad">Paypal button is loading</h2>
+          <div id="paypal-checkout-btn"></div>
+        </mat-expansion-panel>
 
-</div>
-
+<ng-template #booked>
+    <p>This cuisine is already booked.</p>
+</ng-template>

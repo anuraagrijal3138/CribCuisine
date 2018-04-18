@@ -4,11 +4,11 @@ img {
     border-radius: 5%;
 }
 
-paypal-checkout-btn{
-    padding-left: 150px important!;
-}
-
 #textRow{
     height: 200px;
     width: 50%;
+}
+
+.high {
+    height:100px;
 }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 //load the environment file that we edited
@@ -20,6 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CuisineFormComponent } from './post-cuisine/cuisine-form/cuisine-form.component';
 import { Material } from './material.module';
+import { NgbdCarouselConfig } from './homepage/carousel-config';
+
 //database handle
 import { AngularFireModule } from 'angularfire2';
 import { CuisinesService } from './cuisines/cuisines.service';
@@ -31,6 +34,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HostcuisinesComponent } from './dashboard/hostcuisines/hostcuisines.component';
 import { HostHeaderComponent } from './host-header/host-header.component';
 import { HostcuisinedetailsComponent } from './dashboard/hostcuisines/hostcuisinedetails/hostcuisinedetails.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -49,9 +53,11 @@ import { HostcuisinedetailsComponent } from './dashboard/hostcuisines/hostcuisin
     HostcuisinesComponent,
     HostHeaderComponent,
     HostcuisinedetailsComponent,
+    NgbdCarouselConfig,
   
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -60,7 +66,8 @@ import { HostcuisinedetailsComponent } from './dashboard/hostcuisines/hostcuisin
     NoopAnimationsModule,
     Material,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    NgbModule.forRoot()
   ],
   providers: [CuisinesService, AuthGuardService, AngularFireDatabase, AngularFireDatabaseModule,
     AuthService, AngularFireAuth],

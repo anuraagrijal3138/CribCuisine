@@ -52,34 +52,27 @@ const APP_NAME = 'CribCuisine';
 /**
  * Sends a welcome email to new user.
  */
-// [START onCreateTrigger]
+
 exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
-// [END onCreateTrigger]
-  // [START eventAttributes]
-  const email = user.data.email; // The email of the user.
-  const displayName = user.data.displayName; // The display name of the user.
-  // [END eventAttributes]
+
+  const email = user.email;
+  const displayName = user.displayName; 
   return sendWelcomeEmail(email, displayName);
 });
-// [END sendWelcomeEmail]
-// [START sendByeEmail]
-/**
- * Send an account deleted email confirmation to users who delete their accounts.
- */
-// [START onDeleteTrigger]
-exports.sendByeEmail = functions.auth.user().onDelete((user) => {
-    // [END onDeleteTrigger]
-      const email = user.email;
-      const displayName = user.displayName;
+
+
+// exports.sendByeEmail = functions.auth.user().onDelete((user) => {
     
-      return sendGoodbyEmail(email, displayName);
-    });
-    // [END sendByeEmail]
+//       const email = user.email;
+//       const displayName = user.displayName;
+//       return sendGoodbyEmail(email, displayName);
+//     });
+
     
 // Sends a welcome email to the given user.
 function sendWelcomeEmail(email, displayName) {
   const mailOptions = {
-    from: `${APP_NAME} <noreply@firebase.com>`,
+    from: `${APP_NAME} `,
     to: email,
   };
 
@@ -95,7 +88,7 @@ function sendWelcomeEmail(email, displayName) {
 // Sends a goodbye email to the given user.
 function sendGoodbyEmail(email, displayName) {
   const mailOptions = {
-    from: `${APP_NAME} <noreply@firebase.com>`,
+    from: `${APP_NAME} `,
     to: email,
   };
 
@@ -108,7 +101,7 @@ function sendGoodbyEmail(email, displayName) {
 }
 
 // Sends a Email to host letting them know they have a new Guest 
-function sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName) {
+function sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName, hostId) {
   const mailOptions = {
     from: `${APP_NAME} `,
     to: hostEmail,
@@ -120,11 +113,12 @@ function sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName
                       Guest name: ${guestName} 
                       Guest email: ${guestEmail}`;
   return mailTransport.sendMail(mailOptions).then(() => {
-    return console.log('Host confirmation email sent to:', hostEmail);
+     console.log('Host confirmation email sent to:', hostEmail);
+     return addNewNotification(`you have a new Guest ${guestName} arriving for ${cuisineName}. Their email is: ${guestEmail}`, hostId)
   });
 }
 
-function sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineName, hostDorm, hostStreetAddress1, hostStreetAddress2, startTime) {
+function sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineName, hostDorm, hostStreetAddress1, hostStreetAddress2, startTime, guestId) {
   const mailOptions = {
     from: `${APP_NAME} `,
     to: guestEmail,
@@ -134,38 +128,55 @@ function sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineNam
   mailOptions.subject = `Confirmation regarding your recent Booking!`;
   mailOptions.text = `Hey ${guestName || ''}!, We confirm that you are now booked to enjoy ${cuisineName}. Here are the details of your host:
                       host name: ${hostName}
-                      host email: ${hostName}
+                      host email: ${hostEmail}
                       location: ${hostDorm}, ${hostStreetAddress1}, ${hostStreetAddress2}
                       time: ${startTime}`;
   return mailTransport.sendMail(mailOptions).then(() => {
-    return console.log('Guest confirmation email sent to:', guestEmail);
+     console.log('Guest confirmation email sent to:', guestEmail);
+     return addNewNotification(
+       `You are now booked to enjoy ${cuisineName} hosted by ${hostName} at ${hostDorm}, ${hostStreetAddress1}, ${hostStreetAddress2} on ${startTime}`,
+        guestId).then((success)=> console.log("successfully added new notification"))
+          .catch(()=>  console.log("error adding notification to guest's id"))
   });
 }
 
-exports.addUserToDB = functions.auth.user().onCreate(event => {
-    admin.database().ref('/users/' + event.data.uid).set({
-      name: event.data.displayName,
-      email: event.data.email,
-      photoURL: event.data.photoURL,
+
+exports.addUserToDB = functions.auth.user().onCreate((user) => {
+  console.log("inside user add to DB function");
+  console.log(user);
+  
+    admin.database().ref('/users/' + user.uid).set({
+      name: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL,
       hostRating: 0,
       userRating: 0,
       isHost: false,
-      hostedCuisines: {},
-      bookedCuisines: {}
-    });
+      hostedCuisines: [],
+      bookedCuisines: []
+    }).then((success)=>{
+      console.log("successfully added user to database");
+      return addNewNotification("Welcom to CribCuisine!", user.uid)
+        .then((success) => {console.log("successfuly added welcome notification");
+                  return addNewNotification("Browse the posted cuisines or you can add your own listing by clicking become a host on header", user.uid)
+                    .then((success)=> console.log("second notification posted successfully"))
+                      .catch((failure) => console.log("failed to send second notification"))                  
+      })
+          .catch((failure) => console.log("failed to add welcome notification to new user"))
+    }).catch((failure)=> console.log("failed to add user to database"));
   });
           
   
 // Sends an email confirmation when a user changes his mailing list subscription.
 exports.sendEmailConfirmation = functions.database.ref('/orders/{orderId}').onCreate((newOrder) => {
   console.log(newOrder);
-  console.log(newOrder.data._newData);
+  console.log(newOrder._data);
   console.log(newOrder.data);
 
-  const val = newOrder.data._newData;
+  const val = newOrder._data;
  
-
-
+  var guestId = val.buyerId;
+  var hostId = val.hostId;
   var hostEmail = val.hostEmail;
   var hostName = val.hostName;
   var guestName = val.buyerName;
@@ -175,11 +186,19 @@ exports.sendEmailConfirmation = functions.database.ref('/orders/{orderId}').onCr
   var hostStreetAddress1 = val.streetAddress1;
   var hostStreedAddress2 = val.streetAddress2;
   var startTime = val.startTime;
+  var hostingDate = val.hostingDate;
+  var cusisineId = val.cuisineID;
 
-  return sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineName, hostDorm, hostStreetAddress1, hostStreedAddress2, startTime)
+  return sendEmailToGuest(hostEmail, hostName, guestName, guestEmail, cuisineName, hostDorm, hostStreetAddress1, hostStreedAddress2, startTime, guestId)
                           .then((success)=>{
-                            return sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName)
-                              .then((success)=> console.log("send email to host succeed"))
+                            return sendEmailToHost(hostEmail, hostName, guestName, guestEmail, cuisineName, hostId)
+                              .then((success)=> {
+                                console.log("send email to host succeed");
+                                return addBookedCuisines(guestId, cusisineId, cuisineName, hostDorm, hostStreetAddress1, hostStreedAddress2, startTime, hostingDate )
+                                  .then((success) => console.log("successfuly added on user's bookedCuisines"))
+                                    .catch((error) => console.log("error while adding to users booked cuisines"))
+                                        
+                            })
                                 .catch((error)=> {console.log("error while sending email to Host");
                                         console.log(error);                
                               })
@@ -187,7 +206,34 @@ exports.sendEmailConfirmation = functions.database.ref('/orders/{orderId}').onCr
                             console.log("Failed to send Email to Guest");
                             console.log(error);
                           
-                          });
+      });
 
 });
 
+
+//once the order is confirmed
+
+
+//function to update message for each users notifications
+
+function addNewNotification(message, userID){
+  var newNotificationRef = admin.database().ref('/users/' + userID+'/notification').push();
+  return newNotificationRef.set({
+    notification: message
+  });
+
+}
+
+function addBookedCuisines(userID, cuisineID, name, dorm, address1, address2, time, date ){
+  var bookedCuisineRef = admin.database().ref('/users/' + userID+'/bokedcuisines/'+cuisineID);
+  
+  return bookedCuisineRef.set({
+    cuisineName: name,
+    dormName: dorm,
+    streetAddress1: address1,
+    streetAddress2: address2,
+    startTime: time,
+    date: date
+  });
+
+}
