@@ -61,12 +61,12 @@ exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
 });
 
 
-// exports.sendByeEmail = functions.auth.user().onDelete((user) => {
+exports.sendByeEmail = functions.auth.user().onDelete((user) => {
     
-//       const email = user.email;
-//       const displayName = user.displayName;
-//       return sendGoodbyEmail(email, displayName);
-//     });
+      const email = user.email;
+      const displayName = user.displayName;
+      return sendGoodbyEmail(email, displayName);
+    });
 
     
 // Sends a welcome email to the given user.

@@ -23,11 +23,6 @@ export class HomepageComponent  {
                 
                }
 
-
-
-
-  
-
   signInWithGoogle()  {
     this.email= this.authService.signInWithGoogle()
       .then((success) => {
