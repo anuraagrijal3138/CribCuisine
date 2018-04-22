@@ -71,7 +71,8 @@
     </div>
     <div id="lastDiv"></div>
 
-    <mat-expansion-panel *ngIf="cuisine.remainingCapacity>0; else booked">
+    <!-- <mat-expansion-panel *ngIf="cuisine.remainingCapacity>0; else booked"> -->
+    <mat-expansion-panel >
         <mat-expansion-panel-header>
           <mat-panel-title>
             Book it!
@@ -84,6 +85,6 @@
           <div id="paypal-checkout-btn"></div>
         </mat-expansion-panel>
 
-<ng-template #booked>
+<!-- <ng-template #booked>
     <p>This cuisine is already booked.</p>
-</ng-template>
+</ng-template> -->
