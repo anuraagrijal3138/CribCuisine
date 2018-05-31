@@ -2,46 +2,49 @@
 <html>
 
   <head>
-    <title>ng-bootstrap demo</title>
+    <title>CribCuisine</title>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
   </head>
 
   <body>
-<app-header></app-header>
-  <div class="container text-center row">
-      <ul>
-          <li><a class="active" href="#home">Home</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
-  </div>
-    <!-- <h1>CribCuisine</h1>
-    <p> Find delicious homemade food near you. </p>
 
-    <div class="btn-group">
-      <button (click)="login()" class="btn btn-lg btn-warning">Login with Google!</button>
-    </div> -->
+    <div class="header">
+      <h1>CribCuisine</h1>
+      <h2> Find Delicious Homemade Food Near You </h2>
+    </div>
 
+    <div class="topnav">
+     
+      <a class="active" href="#home">Home</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+      
+        <button (click)="login()" class="btn pull-right"><span>LOG IN</span></button>
+      
+      
+    </div>
 
-
+     
+   
 <ngb-carousel *ngIf="images">
   <ng-template ngbSlide>
-    <img [src]="images[0]" alt="Random first slide">
+    <img [src]="images[0]" alt="First slide">
     <div class="carousel-caption">
       <h3>10 seconds between slides...</h3>
       <p>This carousel uses customized default values.</p>
     </div>
   </ng-template>
   <ng-template ngbSlide>
-    <img [src]="images[1]"  alt="Random second slide">
+    <img [src]="images[1]"  alt="Second slide">
     <div class="carousel-caption">
       <h3>No keyboard...</h3>
       <p>This carousel uses customized default values.</p>
     </div>
   </ng-template>
   <ng-template ngbSlide>
-    <img [src]="images[2]" alt="Random third slide">
+    <img [src]="images[2]" alt="Third slide">
     <div class="carousel-caption">
       <h3>And no wrap after last slide.</h3>
       <p>This carousel uses customized default values.</p>

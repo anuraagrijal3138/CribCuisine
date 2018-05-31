@@ -24,6 +24,28 @@
                 <mat-list-item>Dorm: {{ book.dormName }}</mat-list-item>
                 <mat-list-item>Address1: {{ book.streetAddress1 }}</mat-list-item>
                 <mat-list-item>Address2: {{ book.streetAddress2 }}</mat-list-item>
+                <p> Rate this</p>
+
+                <div class="form-group">
+                    <ngb-rating [formControl]="ctrl"></ngb-rating>
+                    <div class="form-text small">
+                      <div *ngIf="ctrl.valid" class="text-success">Thanks!</div>
+                      <div *ngIf="ctrl.invalid" class="text-danger">Please rate your experience</div>
+                    </div>
+                  </div>
+                  
+                  <!-- <hr>
+                  <pre>Model: <b>{{ ctrl.value }}</b></pre>
+                  <button class="btn btn-sm btn-outline-{{ ctrl.disabled ? 'danger' : 'success'}}" (click)="toggle()">
+                    {{ ctrl.disabled ? "control disabled" : " control enabled" }}
+                  </button>
+                  <button class="btn btn-sm btn-outline-primary" (click)="ctrl.setValue(null)">Clear</button> -->
+
+
+
+
+
+
                 <mat-divider></mat-divider>
               </mat-list>
               </mat-panel-description>

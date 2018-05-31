@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import {FormControl, Validators} from '@angular/forms';
 import { CuisinesService } from '../cuisines/cuisines.service';
 import { Observable } from 'rxjs/Observable';
 
@@ -31,7 +32,16 @@ export class DashboardComponent implements OnInit {
 					if(message.length > 0){
             this.isEmpty = false;
           }
-				}
-			);
-  }
+				});
+    }
+
+    ctrl = new FormControl(null, Validators.required);
+
+    toggle() {
+      if (this.ctrl.disabled) {
+        this.ctrl.enable();
+      } else {
+        this.ctrl.disable();
+      }
+    }
 }
