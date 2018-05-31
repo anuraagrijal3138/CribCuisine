@@ -2,14 +2,15 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../auth.service';
-import { Cuisine } from './cuisine.model';
+
+//TODO: Define a Cuisine model and replace any with cuisine
 
 
 @Injectable()
 export class CuisinesService {
 
-	cuisineSelected = new EventEmitter<Cuisine>();
-	hostCuisineSelected = new EventEmitter<Cuisine>();
+	cuisineSelected = new EventEmitter<any>();
+	hostCuisineSelected = new EventEmitter<any>();
 	
 	cuisines : Observable<any[]>;	
 	usercuisines: Observable<any[]>;

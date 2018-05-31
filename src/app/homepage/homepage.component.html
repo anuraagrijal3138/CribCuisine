@@ -1,37 +1,30 @@
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <title>CribCuisine</title>
-    <meta name="viewport" content="width=device-width">
-
-  </head>
-
   <body>
 
-    <div class="header">
+    <!-- <div class="header">
       <h1>CribCuisine</h1>
       <h2> Find Delicious Homemade Food Near You </h2>
-    </div>
+    </div> -->
 
     <div class="topnav">
      
-      <a class="active" href="#home">Home</a>
+      <a class="active" href="#home">CribCuisine</a>
       <a href="#news">News</a>
       <a href="#contact">Contact</a>
       <a href="#about">About</a>
       
-        <button (click)="login()" class="btn pull-right"><span>LOG IN</span></button>
-      
-      
+        <button (click)="login()" class="btn pull-right"><span>LOG IN</span></button>  
     </div>
 
      
    
-<ngb-carousel *ngIf="images" role="listbox" style=" width:100%; height: 500px !important;">
+<ngb-carousel *ngIf="images" >
+    
   <ng-template ngbSlide >
+      
     <img [src]="images[0]" alt="First slide">
+
     <div class="carousel-caption">
+        <p>ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp.</p>
       <h3>10 seconds between slides...</h3>
       <p>This carousel uses customized default values.</p>
     </div>
@@ -51,7 +44,7 @@
     <img [src]="images[2]" alt="Third slide">
 
   </ng-template >
-  <ng-template ngbSlide style=" width:100%; height: 500px !important;">
+  <ng-template ngbSlide>
     <img [src]="images[3]" alt="Third slide">
     <div class="carousel-caption">
       <h3>And no wrap after last slide.</h3>
@@ -66,9 +59,9 @@
         <p>&copy; Copyright @ Team Utilitarian 2017</p>
     </div>
   </footer>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
   
-</html>
+
 
 
 
