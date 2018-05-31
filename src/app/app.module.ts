@@ -21,7 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CuisineFormComponent } from './post-cuisine/cuisine-form/cuisine-form.component';
 import { Material } from './material.module';
-import { NgbdCarouselConfig } from './homepage/carousel-config';
+//import { NgbdCarouselConfig } from './homepage/carousel-config';
 
 //database handle
 import { AngularFireModule } from 'angularfire2';
@@ -53,7 +53,7 @@ import { HttpClientModule } from '@angular/common/http';
     HostcuisinesComponent,
     HostHeaderComponent,
     HostcuisinedetailsComponent,
-    NgbdCarouselConfig,
+    //NgbdCarouselConfig,
   
   ],
   imports: [

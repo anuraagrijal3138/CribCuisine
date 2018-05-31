@@ -6,18 +6,18 @@ import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
-  selector: 'app-homepage',
+  selector: 'app-homepage', 
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent  {
   email: Promise<String>;
-  images: Array<string> = ['./../../assets/images/4.jpg', './../../assets/images/2.jpg', './../../assets/images/3.jpg'];
+  images: Array<string> = ['./../../assets/images/4.jpg', './../../assets/images/2.jpg', './../../assets/images/3.jpg', './../../assets/images/1.jpg'];
 
   constructor(private authService: AuthService,
               private router: Router,
               config: NgbCarouselConfig, private _http: HttpClient) {
-                config.interval = 800;
+                config.interval = 2000;
                 config.wrap = true;
                 config.keyboard = true;
                 
