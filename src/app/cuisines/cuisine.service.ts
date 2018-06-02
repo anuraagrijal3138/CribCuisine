@@ -22,14 +22,9 @@ export class CuisineService {
     }
  
     getCuisine(id: string) {
-        //console.log(id);
         return this.getCuisines().pipe(
-        // (+) before `id` turns the string into a number
-        
-        map(cuisines => {
-            //console.log(cuisines);
-            cuisines.find(cuisine => cuisine.imgPostKey === id)
-        })
+          // (+) before `id` turns the string into a number
+          map(heroes => heroes.find(hero => hero.imgPostKey === id))
         );
-    }
+      }
 }

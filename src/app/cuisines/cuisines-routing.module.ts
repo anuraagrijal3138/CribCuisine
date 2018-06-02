@@ -6,7 +6,7 @@ import { CuisineDetailComponent }  from './cuisine-detail.component';
 
 const cuisinesRoutes: Routes = [
   { path: 'cuisines',  component: CuisineListComponent },
-  { path: 'cuisine/:imgPostKey', component: CuisineDetailComponent }
+  { path: 'cuisine/:id', component: CuisineDetailComponent }
 ];
 
 @NgModule({

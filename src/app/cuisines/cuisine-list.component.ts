@@ -13,7 +13,7 @@ import {  CuisineService }  from './cuisine.service';
     <ul class="items">
       <li *ngFor="let cuisine of cuisines$ | async"
         [class.selected]="cuisine.imgPostKey === selectedId">
-        <a [routerLink]="['/cuisine', cuisine.imgPostKey]">
+        <a [routerLink]="['/cuisine', cuisine.id]">
           {{ cuisine.cuisineName }}
         </a>
       </li>
