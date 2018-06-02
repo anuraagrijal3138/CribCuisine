@@ -6,11 +6,11 @@ import {FormControl, Validators} from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'dashboard-home',
+  templateUrl: './dashboard-home.component.html',
+  styleUrls: ['./dashboard-home.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardHomeComponent implements OnInit {
   userName: String;
   notifications : Observable<any[]>;
   booked: Observable<any[]>;
