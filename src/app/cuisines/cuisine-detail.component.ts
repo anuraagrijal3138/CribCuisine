@@ -11,9 +11,9 @@ import {  CuisineService }  from './cuisine.service';
   template: `
   <h2>HEROES</h2>
   <div *ngIf="hero$ | async as hero">
-    <h3>"{{ hero.name }}"</h3>
+    <h3>"{{ hero.cuisineName }}"</h3>
     <div>
-      <label>Id: </label>{{ hero.id }}</div>
+      <label>Id: </label>{{ hero.dormName }}</div>
     <div>
       <label>Name: </label>
       <input [(ngModel)]="hero.name" placeholder="name"/>
@@ -47,6 +47,6 @@ export class CuisineDetailComponent implements OnInit {
     // Pass along the hero id if available
     // so that the HeroList component can select that hero.
     // Include a junk 'foo' property for fun.
-    this.router.navigate(['/heroes', { id: heroId, foo: 'foo' }]);
+    this.router.navigate(['/cuisines', { id: heroId, foo: 'foo' }]);
   }
 }
