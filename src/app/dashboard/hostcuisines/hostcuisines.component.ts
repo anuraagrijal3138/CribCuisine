@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { CuisinesService } from '../../cuisines/cuisines.service';
+//import { CuisinesService } from '../../cuisines/cuisines.service';
 
 @Component({
   selector: 'app-hostcuisines',
@@ -17,18 +17,18 @@ export class HostcuisinesComponent  {
   hostcuisines : Observable<any[]>;
 
   constructor(private authService: AuthService,
-              private cuisinesService: CuisinesService,
+              //private cuisinesService: CuisinesService,
               private router: Router) {
                 this.userName = authService.auth.currentUser.displayName;
-                this.hostcuisines = cuisinesService.usercuisines;
+                //this.hostcuisines = cuisinesService.usercuisines;
               }
 
   ngOnInit() {
-    this.cuisinesService.hostCuisineSelected
-      .subscribe(
-        (cuisine : any) => {
-          this.hostSelectedCuisine = cuisine;
-        }
-      );
+    // this.cuisinesService.hostCuisineSelected
+    //   .subscribe(
+    //     (cuisine : any) => {
+    //       this.hostSelectedCuisine = cuisine;
+    //     }
+    //   );
   }
 }

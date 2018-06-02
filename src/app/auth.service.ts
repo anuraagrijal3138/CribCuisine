@@ -16,7 +16,10 @@ export class AuthService {
   db:		    firebase.database.Database;
 
   constructor(){
-    firebase.initializeApp(environment.firebase);
+    
+    if (!firebase.apps.length) {
+      firebase.initializeApp(environment.firebase);
+  }
     this.auth = firebase.auth();
     this.db = firebase.database();
 

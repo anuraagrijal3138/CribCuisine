@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { CuisinesService } from '../../cuisines.service';
+//import { CuisinesService } from '../../cuisines.service';
 import { Observable } from 'rxjs/Observable';
 
-import { Cuisine } from '../../cuisine.model';
+//import { Cuisine } from '../../cuisine.model';
 import { AuthService } from '../../../auth.service';
 
 @Component({
@@ -15,11 +15,11 @@ export class CuisineItemComponent implements OnInit {
   @Input() cuisine: any;
   
   
-  constructor(private cuisinesService: CuisinesService,
-              public authService: AuthService) {  
+  // constructor(private cuisinesService: CuisinesService,
+  //             public authService: AuthService) {  
 
 
-                  }
+  //                 }
 
   ngOnInit() {
     
@@ -27,8 +27,8 @@ export class CuisineItemComponent implements OnInit {
   }
 
   onSelected() {
-    this.cuisinesService.cuisineSelected.emit(this.cuisine);
-    this.cuisinesService.hostCuisineSelected.emit(this.cuisine);
+    // this.cuisinesService.cuisineSelected.emit(this.cuisine);
+    // this.cuisinesService.hostCuisineSelected.emit(this.cuisine);
     console.log("onselected: of cuisine item")
     console.log(this.cuisine);  
   }

@@ -6,7 +6,9 @@ export class StorageService{
     storageRef : firebase.storage.Reference;
 
     constructor(){
-        firebase.initializeApp(environment.firebase);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(environment.firebase);
+        }
         var storageRef = firebase.storage().ref();
         this.storageRef = storageRef;
     }

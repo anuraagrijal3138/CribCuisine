@@ -4,16 +4,16 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-
+import { CuisinesModule } from './cuisines/cuisines.module';
 //load the environment file that we edited
 import { environment } from '../environments/environment';
 
 
+
 import { AppComponent } from './app.component';
-import { CuisinesComponent } from './cuisines/cuisines.component';
-import { CuisineListComponent } from './cuisines/cuisine-list/cuisine-list.component';
-import { CuisineDetailComponent } from './cuisines/cuisine-detail/cuisine-detail.component';
+// import { CuisinesComponent } from './cuisines/cuisines.component';
+// import { CuisineListComponent } from './cuisines/cuisine-list/cuisine-list.component';
+// import { CuisineDetailComponent } from './cuisines/cuisine-detail/cuisine-detail.component';
 import { CuisineItemComponent } from './cuisines/cuisine-list/cuisine-item/cuisine-item.component';
 import { PostCuisineComponent } from './post-cuisine/post-cuisine.component';
 import { HeaderComponent } from './header/header.component';
@@ -25,7 +25,7 @@ import { Material } from './material.module';
 
 //database handle
 import { AngularFireModule } from 'angularfire2';
-import { CuisinesService } from './cuisines/cuisines.service';
+//import { CuisinesService } from './cuisines/cuisines.service';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AuthService } from './auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -35,30 +35,15 @@ import { HostcuisinesComponent } from './dashboard/hostcuisines/hostcuisines.com
 import { HostHeaderComponent } from './host-header/host-header.component';
 import { HostcuisinedetailsComponent } from './dashboard/hostcuisines/hostcuisinedetails/hostcuisinedetails.component';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CuisinesComponent,
-    CuisineListComponent,
-    CuisineDetailComponent,
-    CuisineItemComponent,
-    PostCuisineComponent,
-    HeaderComponent,
-    HomepageComponent,
-    CuisineFormComponent,
-    DashboardComponent,
-    HostcuisinesComponent,
-    HostHeaderComponent,
-    HostcuisinedetailsComponent,
-    //NgbdCarouselConfig,
-  
-  ],
   imports: [
     HttpClientModule,
     BrowserModule,
+    CuisinesModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
@@ -69,8 +54,34 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebase),
     NgbModule.forRoot()
   ],
-  providers: [CuisinesService, AuthGuardService, AngularFireDatabase, AngularFireDatabaseModule,
-    AuthService, AngularFireAuth],
-  bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    // CuisinesComponent,
+    // CuisineListComponent,
+    // CuisineDetailComponent,
+    CuisineItemComponent,
+    PostCuisineComponent,
+    HeaderComponent,
+    HomepageComponent,
+    CuisineFormComponent,
+    DashboardComponent,
+    HostcuisinesComponent,
+    HostHeaderComponent,
+    HostcuisinedetailsComponent,
+    //NgbdCarouselConfig,
+  ],
+  providers: [
+    //CuisinesService, 
+    AuthGuardService, AngularFireDatabase, AngularFireDatabaseModule,
+    AuthService, AngularFireAuth
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
-export class AppModule { }
+export class AppModule {
+    // Diagnostic only: inspect router configuration
+    constructor(router: Router) {
+      console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+    }
+ }
